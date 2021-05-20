@@ -13,7 +13,8 @@ passport.use(new GoogleStrategy({
     .then((user) => {
       if (user) {
         if (user.avatar) {
-          return cb(null, user);
+        //   return cb(null, user);
+          return user;
         }
         user.avatar = googleProfile.photos[0].value;
         return user.save()
