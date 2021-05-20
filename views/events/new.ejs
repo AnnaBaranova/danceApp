@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+
+
+<div class="container">
+<form action="/events" id="new-form" method="POST">
+    <label>Title:</label>
+    <input type="text" name="title">
+    <label>Details:</label>
+    <input type="text" name="details">
+    <label>Limit of Guests:</label>
+    <input type="number" name="guestLimit" value="6">
+    <label>Date:</label>
+    <input type="datetime-local" name="departs" value="<%= (new Date()).toISOString().slice(0, 16)%>">
+    <label>Place:</label>
+    <input type="text" name="place">
+    <input type="submit" value="Add Event">
+</form>
+</div>
+
+</body>
+
+</html>
