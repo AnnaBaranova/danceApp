@@ -41,7 +41,13 @@ function create (req, res){
 
 function show (req, res){
     Event.findById(req.params.id)
-    .then(event =>  res.render('events/show', { title: 'Show Event', user: req.user, event }))
+    .populate('attendees')
+    .exec()
+    .then(event =>  {
+        console.log(event)
+        res.render('events/show', { title: 'Show Event', user: req.user, event })
+    })
+
     .catch(err => res.redirect ('/events'));
 }
 

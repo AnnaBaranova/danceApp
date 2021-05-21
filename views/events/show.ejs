@@ -36,9 +36,9 @@
                     <%= event.guestLimit %>
                 </td>
                 <td>
-                    <% event.attendees.forEach(function(e) { %>
+                    <% event.attendees.forEach(function(el) { %>
                         <li>
-                            <%= e.Attendees %>
+                            <%= el.name %>
                         </li>
                         <% }); %>
                 </td>
