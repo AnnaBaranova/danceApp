@@ -74,6 +74,12 @@ Event.findById(req.params.id)
 .catch(err => res.redirect ('/events'));
 }
 
+function deleteEvent(req, res){
+    Event.findByIdAndDelete (req.params.id)
+    .then(() => res.redirect('/events'))
+    .catch(() => res.redirect('/events'))
+}
+
 module.exports = {
     index,
     new: newEvent,
@@ -81,4 +87,5 @@ module.exports = {
     show,
     edit,
     update,
+    delete: deleteEvent,
 };

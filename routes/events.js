@@ -14,5 +14,6 @@ router.post('/', isLoggedIn, eventsRouter.create)
 router.get('/:id', isLoggedIn, eventsRouter.show)
 router.get('/:id/edit', isLoggedIn, eventsRouter.edit)
 router.patch('/:id', isLoggedIn, eventsRouter.update)
+router.delete('/:id', isLoggedIn, eventsRouter.delete)
 
 module.exports = router;

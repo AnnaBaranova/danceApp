@@ -1,107 +1,111 @@
 <%- include('../partials/header') %>
 
-<h3>I am a Host</h3>
+    <h3>I am a Host</h3>
 
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Date</th>
-            <th>GuestLimit</th>
-            <th>Host</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <% myEvents.forEach(function(e) { %>
+    <table>
+        <thead>
             <tr>
-                <td>
-                    <%= e.title%>
-                </td>
-                <td>
-                    <%= e.date.toISOString().slice(0, 16) %>
-                </td>
-                <td>
-                    <%= e.guestLimit %>
-                </td>
-                <td>
-                    <%= e.hostName %>
-                </td>
-                <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                <th>Title</th>
+                <th>Date</th>
+                <th>GuestLimit</th>
+                <th>Host</th>
             </tr>
-            <% }); %>
+        </thead>
+        <tbody>
 
-    </tbody>
-</table>
-<br>
-<a href="/events/new" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-<br>
-<h3>I am a Guest</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Date</th>
-            <th>GuestLimit</th>
-            <th>Host</th>
-        </tr>
-    </thead>
-    <tbody>
+            <% myEvents.forEach(function(e) { %>
+                <tr>
+                    <td>
+                        <%= e.title%>
+                    </td>
+                    <td>
+                        <%= e.date.toISOString().slice(0, 16) %>
+                    </td>
+                    <td>
+                        <%= e.guestLimit %>
+                    </td>
+                    <td>
+                        <%= e.hostName %>
+                    </td>
+                    <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                    <td> <form action="/events/<%= e._id %>?_method=DELETE" class="delete-form" method="POST">
+                           <button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i
+                            class="material-icons">clear</i>></button> </form></td>
+                </tr>
+                <% }); %>
 
-        <% guestEvents.forEach(function(e) { %>
+        </tbody>
+    </table>
+    <br>
+    <a href="/events/new" class="btn-floating btn-large waves-effect waves-light red"><i
+            class="material-icons">add</i></a>
+    <br>
+    <h3>I am a Guest</h3>
+    <table>
+        <thead>
             <tr>
-                <td>
-                    <%= e.title%>
-                </td>
-                <td>
-                    <%= e.date.toISOString().slice(0, 16) %>
-                </td>
-                <td>
-                    <%= e.guestLimit %>
-                </td>
-                <td>
-                    <%= e.hostName %>
-                </td>
-                <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                <th>Title</th>
+                <th>Date</th>
+                <th>GuestLimit</th>
+                <th>Host</th>
             </tr>
-            <% }); %>
+        </thead>
+        <tbody>
 
-    </tbody>
-</table>
-<br>
-<h3>Other Events</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Date</th>
-            <th>GuestLimit</th>
-            <th>Host</th>
-        </tr>
-    </thead>
-    <tbody>
+            <% guestEvents.forEach(function(e) { %>
+                <tr>
+                    <td>
+                        <%= e.title%>
+                    </td>
+                    <td>
+                        <%= e.date.toISOString().slice(0, 16) %>
+                    </td>
+                    <td>
+                        <%= e.guestLimit %>
+                    </td>
+                    <td>
+                        <%= e.hostName %>
+                    </td>
+                    <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                </tr>
+                <% }); %>
 
-        <% otherEvents.forEach(function(e) { %>
+        </tbody>
+    </table>
+    <br>
+    <h3>Other Events</h3>
+    <table>
+        <thead>
             <tr>
-                <td>
-                    <%= e.title%>
-                </td>
-                <td>
-                    <%= e.date.toISOString().slice(0, 16) %>
-                </td>
-                <td>
-                    <%= e.guestLimit %>
-                </td>
-                <td>
-                    <%= e.hostName %>
-                </td>
-                <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                <th>Title</th>
+                <th>Date</th>
+                <th>GuestLimit</th>
+                <th>Host</th>
             </tr>
-            <% }); %>
+        </thead>
+        <tbody>
 
-    </tbody>
-</table>
+            <% otherEvents.forEach(function(e) { %>
+                <tr>
+                    <td>
+                        <%= e.title%>
+                    </td>
+                    <td>
+                        <%= e.date.toISOString().slice(0, 16) %>
+                    </td>
+                    <td>
+                        <%= e.guestLimit %>
+                    </td>
+                    <td>
+                        <%= e.hostName %>
+                    </td>
+                    <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                </tr>
+                <% }); %>
 
-</body>
+        </tbody>
+    </table>
 
-</html>
+    </body>
+
+    </html>
