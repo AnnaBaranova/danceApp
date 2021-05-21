@@ -1,0 +1,53 @@
+<%- include('../partials/header') %>
+    <h3>
+        <%= event.title %>
+    </h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Details</th>
+                <th>Date</th>
+                <th>Place</th>
+                <th>Host</th>
+                <th>GuestLimit</th>
+                <th>Attendees</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <%= event.title%>
+                </td>
+                <td>
+                    <%= event.details%>
+                </td>
+                <td>
+                    <%= event.date.toISOString().slice(0, 16) %>
+                </td>
+                <td>
+                    <%= event.place%>
+                </td>
+                <td>
+                    <%= event.hostName%>
+                </td>
+                <td>
+                    <%= event.guestLimit %>
+                </td>
+                <td>
+                    <% event.attendees.forEach(function(e) { %>
+                        <li>
+                            <%= e.Attendees %>
+                        </li>
+                        <% }); %>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+    </body>
+
+    </html>

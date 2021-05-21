@@ -9,9 +9,6 @@ function index(req, res){
         const guestEvents = [];
         const otherEvents = [];
         events.forEach(event => {
-            console.log(req.user._id)
-            console.log(event.hostId)
-            console.log(event)
             console.log(req.user._id.toString() === event.hostId.toString())
             if(req.user._id.toString() === event.hostId.toString()) {
                 myEvents.push(event);
@@ -35,7 +32,6 @@ function newEvent(req, res) {
 
 function create (req, res){
     const event = new Event (req.body);
-    console.log (req.user)
     event.hostId = req.user._id;
     event.hostName = req.user.name;
     event.save()
@@ -43,8 +39,15 @@ function create (req, res){
     .catch(err => res.redirect ('/events/new'));
 };
 
+function show (req, res){
+    Event.findById(req.params.id)
+    .then(event =>  res.render('events/show', { title: 'Show Event', user: req.user, event }))
+    .catch(err => res.redirect ('/events'));
+}
+
 module.exports = {
     index,
     new: newEvent,
     create,
+    show,
 };
