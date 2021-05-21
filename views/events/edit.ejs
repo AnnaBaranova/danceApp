@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+
+
+<div class="container">
+<form action="/events/<%=event._id%>?_method=PATCH" id="edit-form" method="POST">
+    <label>Title:</label>
+    <input type="text" name="title" value="<%= event.title %>">
+    <label>Details:</label>
+    <input type="text" name="details" value="<%= event.details %>">
+    <label>Limit of Guests:</label>
+    <input type="number" name="guestLimit" value="<%= event.guestLimit %>">
+    <label>Date:</label>
+    <input type="datetime-local" name="date" value="<%= event.date.toISOString().slice(0, 16)%>">
+    <label>Place:</label>
+    <input type="text" name="place" value="<%= event.place %>">
+    <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i class="material-icons">send</i></button>
+</form>
+</div>
+
+</body>
+
+</html>

@@ -9,7 +9,7 @@ function index(req, res){
         const guestEvents = [];
         const otherEvents = [];
         events.forEach(event => {
-            console.log(req.user._id.toString() === event.hostId.toString())
+            // console.log(req.user._id.toString() === event.hostId.toString())
             if(req.user._id.toString() === event.hostId.toString()) {
                 myEvents.push(event);
             } else if (event.attendees.includes(req.user._id)) {
@@ -44,11 +44,34 @@ function show (req, res){
     .populate('attendees')
     .exec()
     .then(event =>  {
-        console.log(event)
         res.render('events/show', { title: 'Show Event', user: req.user, event })
     })
 
     .catch(err => res.redirect ('/events'));
+};
+
+function edit (req, res){
+    Event.findById(req.params.id)
+    .then(event =>  {
+        res.render('events/edit', { title: 'Edit Event', user: req.user, event })
+    })
+    .catch(err => res.redirect ('/events'));
+
+};
+
+function update (req, res) {
+Event.findById(req.params.id)
+.then (event => {
+    if (!event.hostId.equals(req.user._id)) return res.redirect (`/events/${event._id}`);
+    event.title = req.body.title;
+    event.details = req.body.details;
+    event.guestLimit = req.body.guestLimit;
+    event.date = req.body.date;
+    event.place = req.body.place;
+    return event.save()
+})
+.then((event)=> res.redirect (`/events/${event._id}`))
+.catch(err => res.redirect ('/events'));
 }
 
 module.exports = {
@@ -56,4 +79,6 @@ module.exports = {
     new: newEvent,
     create,
     show,
+    edit,
+    update,
 };
