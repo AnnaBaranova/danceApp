@@ -44,16 +44,25 @@ function show (req, res){
     .populate('attendees')
     .exec()
     .then(event =>  {
-        console.log(event)
         res.render('events/show', { title: 'Show Event', user: req.user, event })
     })
 
     .catch(err => res.redirect ('/events'));
-}
+};
+
+function edit (req, res){
+    Event.findById(req.params.id)
+    .then(event =>  {
+        res.render('events/edit', { title: 'Edit Event', user: req.user, event })
+        .catch(err => res.redirect (`/events/${event._id}`));
+    })
+
+};
 
 module.exports = {
     index,
     new: newEvent,
     create,
     show,
+    edit,
 };
