@@ -20,9 +20,10 @@ const eventSchema = new mongoose.Schema(
             required: true,
             unique: true,
         },
-        host: {
+        hostId: {
             type: Schema.Types.ObjectId, ref: 'User'
         },
+        hostName: String,
         date: Date,
         place: String,
         guestLimit: {

@@ -3,7 +3,29 @@ const Event= require('../models/event');
 
 
 function index(req, res){
- res.render ('events', { title: 'All Events', user: req.user})
+    Event.find({})
+    .then (events => {
+        const myEvents = [];
+        const guestEvents = [];
+        const otherEvents = [];
+        events.forEach(event => {
+            console.log(req.user._id)
+            console.log(event.hostId)
+            console.log(event)
+            console.log(req.user._id.toString() === event.hostId.toString())
+            if(req.user._id.toString() === event.hostId.toString()) {
+                myEvents.push(event);
+            } else if (event.attendees.includes(req.user._id)) {
+                guestEvents.push(event);
+            } else {
+                otherEvents.push(event)
+            }
+        })
+
+        res.render ('events', { title: 'All Events', user: req.user, myEvents, guestEvents, otherEvents})
+    })
+
+    .catch(err => console.log(err))
 };
 
 
@@ -12,12 +34,11 @@ function newEvent(req, res) {
 };
 
 function create (req, res){
-    console.log(req.body)
-    console.log(req.user)
     const event = new Event (req.body);
-    event.host = req.user._id;
+    console.log (req.user)
+    event.hostId = req.user._id;
+    event.hostName = req.user.name;
     event.save()
-    //.then(()=> res.redirect (`/events/${event._id}`))
     .then(()=> res.redirect ('/events'))
     .catch(err => res.redirect ('/events/new'));
 };
