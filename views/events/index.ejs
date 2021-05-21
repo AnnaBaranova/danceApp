@@ -1,5 +1,7 @@
 <%- include('../partials/header') %>
 
+<h3>I am a Host</h3>
+
 <table>
     <thead>
         <tr>
@@ -11,7 +13,73 @@
     </thead>
     <tbody>
 
-        <% events.forEach(function(e) { %>
+        <% myEvents.forEach(function(e) { %>
+            <tr>
+                <td>
+                    <%= e.title%>
+                </td>
+                <td>
+                    <%= e.date.toISOString().slice(0, 16) %>
+                </td>
+                <td>
+                    <%= e.guestLimit %>
+                </td>
+                <td>
+                    <%= e.hostName %>
+                </td>
+                <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+            </tr>
+            <% }); %>
+
+    </tbody>
+</table>
+<br>
+<h3>I am a Guest</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>GuestLimit</th>
+            <th>Host</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <% guestEvents.forEach(function(e) { %>
+            <tr>
+                <td>
+                    <%= e.title%>
+                </td>
+                <td>
+                    <%= e.date.toISOString().slice(0, 16) %>
+                </td>
+                <td>
+                    <%= e.guestLimit %>
+                </td>
+                <td>
+                    <%= e.hostName %>
+                </td>
+                <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+            </tr>
+            <% }); %>
+
+    </tbody>
+</table>
+<br>
+<h3>Other Events</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>GuestLimit</th>
+            <th>Host</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <% otherEvents.forEach(function(e) { %>
             <tr>
                 <td>
                     <%= e.title%>

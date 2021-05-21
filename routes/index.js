@@ -24,7 +24,7 @@ router.get(
 // OAuth logout route
 router.get('/logout', function (req, res) {
   req.logout();
-  res.redirect('/');
+  res.redirect('/users');
 });
 
 module.exports = router;

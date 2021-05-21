@@ -4,7 +4,27 @@ const Event= require('../models/event');
 
 function index(req, res){
     Event.find({})
-    .then (events => res.render ('events', { title: 'All Events', user: req.user, events: events}))
+    .then (events => {
+        const myEvents = [];
+        const guestEvents = [];
+        const otherEvents = [];
+        events.forEach(event => {
+            console.log(req.user._id)
+            console.log(event.hostId)
+            console.log(event)
+            console.log(req.user._id.toString() === event.hostId.toString())
+            if(req.user._id.toString() === event.hostId.toString()) {
+                myEvents.push(event);
+            } else if (event.attendees.includes(req.user._id)) {
+                guestEvents.push(event);
+            } else {
+                otherEvents.push(event)
+            }
+        })
+
+        res.render ('events', { title: 'All Events', user: req.user, myEvents, guestEvents, otherEvents})
+    })
+
     .catch(err => console.log(err))
 };
 
