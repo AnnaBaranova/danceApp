@@ -1,5 +1,38 @@
 <%- include('../partials/header') %>
 
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>GuestLimit</th>
+            <th>Host</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <% events.forEach(function(e) { %>
+            <tr>
+                <td>
+                    <%= e.title%>
+                </td>
+                <td>
+                    <%= e.date.toISOString().slice(0, 16) %>
+                </td>
+                <td>
+                    <%= e.guestLimit %>
+                </td>
+                <td>
+                    <%= e.hostName %>
+                </td>
+                <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+            </tr>
+            <% }); %>
+
+    </tbody>
+</table>
+
+
 
 <a href="/events/new">Add Event</a>
 </body>

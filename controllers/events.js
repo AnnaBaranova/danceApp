@@ -3,7 +3,9 @@ const Event= require('../models/event');
 
 
 function index(req, res){
- res.render ('events', { title: 'All Events', user: req.user})
+    Event.find({})
+    .then (events => res.render ('events', { title: 'All Events', user: req.user, events: events}))
+    .catch(err => console.log(err))
 };
 
 
@@ -12,12 +14,11 @@ function newEvent(req, res) {
 };
 
 function create (req, res){
-    console.log(req.body)
-    console.log(req.user)
     const event = new Event (req.body);
-    event.host = req.user._id;
+    console.log (req.user)
+    event.hostId = req.user._id;
+    event.hostName = req.user.name;
     event.save()
-    //.then(()=> res.redirect (`/events/${event._id}`))
     .then(()=> res.redirect ('/events'))
     .catch(err => res.redirect ('/events/new'));
 };
