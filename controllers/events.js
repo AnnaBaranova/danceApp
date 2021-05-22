@@ -1,5 +1,8 @@
 const Event = require('../models/event');
 
+function message(message, color){
+    return `message=${encodeURIComponent(message)}&color=${color}`;
+}
 
 
 function index(req, res) {
@@ -19,7 +22,14 @@ function index(req, res) {
                 }
             })
 
-            res.render('events', { title: 'All Events', user: req.user, myEvents, guestEvents, otherEvents })
+            res.render('events', { 
+                title: 'All Events', 
+                user: req.user, 
+                myEvents, 
+                guestEvents, 
+                otherEvents, 
+                message: req.query.message, 
+                color: req.query.color})
         })
 
         .catch(err => console.log(err))
@@ -35,7 +45,7 @@ function create(req, res) {
     event.hostId = req.user._id;
     event.hostName = req.user.name;
     event.save()
-        .then(() => res.redirect('/events'))
+        .then(() => res.redirect(`/events?${message("Created", "green")}`))
         .catch(err => res.redirect('/events/new'));
 };
 
@@ -46,7 +56,6 @@ function show(req, res) {
         .then(event => {
             res.render('events/show', { title: 'Show Event', user: req.user, event })
         })
-
         .catch(err => res.redirect('/events'));
 };
 
@@ -70,13 +79,13 @@ function update(req, res) {
             event.place = req.body.place;
             return event.save()
         })
-        .then((event) => res.redirect(`/events/${event._id}`))
+        .then((event) => res.redirect(`/events/${event._id}?${message("Updated","green")}`))
         .catch(err => res.redirect('/events'));
 }
 
 function deleteEvent(req, res) {
     Event.findByIdAndDelete(req.params.id)
-        .then(() => res.redirect('/events'))
+        .then(() => res.redirect(`/events?${message("Deleted", "red")}`))
         .catch(() => res.redirect('/events'))
 };
 
@@ -88,7 +97,7 @@ function addAttendee(req, res) {
             } else {
                 event.attendees.push(req.user._id);
                 event.save()
-                    .then((event) => res.redirect('/events'))
+                    .then((event) => res.redirect(`/events?${message("You joined: "+ event.title,"green")}`))
                     .catch(() => res.redirect('/events'))
             }
         })
@@ -105,7 +114,7 @@ function removeAttendee(req, res) {
                 const newAttendees = event.attendees.filter(el => el.toString() !== req.user._id.toString());
                 event.attendees = newAttendees
                 event.save()
-                    .then((event) => res.redirect('/events'))
+                    .then((event) => res.redirect(`/events?${message("You left: " + event.title, "red")}`))
                     .catch(() => res.redirect('/events'))
             }
         })
