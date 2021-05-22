@@ -6,7 +6,6 @@ function message(message, color) {
 }
 
 function create(req, res) {
-    console.log(req.params)
     Event.findById(req.params.id)
         .then(event => {
             req.body.userId = req.user._id;
@@ -22,7 +21,23 @@ function create(req, res) {
         });
 };
 
+function deleteComment(req, res) {
+    Event.findOne({ 'comments._id': req.params.id })
+        .then(event => {
+            const commentDel = event.comments.id(req.params.id);
+            if (!commentDel.userId.equals(req.user._id)) return res.redirect(`/events/${event._id}`);
+            commentDel.remove();
+            return event.save()
+        })
+        .then((event) => res.redirect(`/events/${event._id}?${message("Remove Comment", "red")}`))
+        .catch(err => {
+            console.log(err);
+            res.redirect('/events');
+        });
+};
+
 
 module.exports = {
     create,
+    delete: deleteComment,
 }

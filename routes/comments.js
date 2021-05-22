@@ -8,6 +8,7 @@ function isLoggedIn(req, res, next) {
   };
 
 router.post('/events/:id/comments', isLoggedIn, commentsRouter.create);
+router.delete('/comments/:id', isLoggedIn, commentsRouter.delete)
 
 
 
