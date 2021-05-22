@@ -16,5 +16,6 @@ router.get('/:id/edit', isLoggedIn, eventsRouter.edit)
 router.patch('/:id', isLoggedIn, eventsRouter.update)
 router.delete('/:id', isLoggedIn, eventsRouter.delete)
 router.get('/:id/join', isLoggedIn, eventsRouter.addAttendee)
+router.get('/:id/leave', isLoggedIn, eventsRouter.removeAttendee)
 
 module.exports = router;
