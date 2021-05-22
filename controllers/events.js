@@ -24,7 +24,7 @@ function index(req, res) {
 
             res.render('events', { 
                 title: 'All Events', 
-                user: req.user, 
+                // user: req.user, 
                 myEvents, 
                 guestEvents, 
                 otherEvents, 
@@ -37,7 +37,7 @@ function index(req, res) {
 
 
 function newEvent(req, res) {
-    res.render('events/new', { title: 'Add Event', user: req.user });
+    res.render('events/new', { title: 'Add Event'});
 };
 
 function create(req, res) {
@@ -54,7 +54,7 @@ function show(req, res) {
         .populate('attendees')
         .exec()
         .then(event => {
-            res.render('events/show', { title: 'Show Event', user: req.user, event })
+            res.render('events/show', { title: 'Show Event', event })
         })
         .catch(err => res.redirect('/events'));
 };
@@ -62,7 +62,7 @@ function show(req, res) {
 function edit(req, res) {
     Event.findById(req.params.id)
         .then(event => {
-            res.render('events/edit', { title: 'Edit Event', user: req.user, event })
+            res.render('events/edit', { title: 'Edit Event', event })
         })
         .catch(err => res.redirect('/events'));
 
