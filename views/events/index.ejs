@@ -1,7 +1,7 @@
 <%- include('../partials/header') %>
 
     <h3>I am a Host</h3>
-
+    <% if (myEvents.length) { %>
     <table>
         <thead>
             <tr>
@@ -36,14 +36,17 @@
                     </td>
                 </tr>
                 <% }); %>
-
         </tbody>
     </table>
+    <% } else { %>
+        <h5>You are not a host yet</h5>
+        <% } %>
     <br>
     <a href="/events/new" class="btn-floating btn-large waves-effect waves-light red"><i
             class="material-icons">add</i></a>
     <br>
     <h3>I am a Guest</h3>
+    <% if (guestEvents.length) { %>
     <table>
         <thead>
             <tr>
@@ -77,8 +80,12 @@
 
         </tbody>
     </table>
+    <% } else { %>
+        <h5>You haven't join any Event yet</h5>
+        <% } %>
     <br>
     <h3>Other Events</h3>
+    <% if (otherEvents.length) { %>
     <table>
         <thead>
             <tr>
@@ -112,6 +119,9 @@
 
         </tbody>
     </table>
+    <% } else { %>
+        <h5><i class="medium material-icons">sentiment_very_dissatisfied</i>No more Events</h5>
+        <% } %>
 
     </body>
     <% if(message) { %>
