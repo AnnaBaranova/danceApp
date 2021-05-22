@@ -2,7 +2,7 @@
 
 
     <div class="container">
-        <form action="/comments/<%=comment._id%>?_method=PUTCH" id="edit-form" method="POST">
+        <form action="/comments/<%=comment._id%>?_method=PUT" id="edit-form" method="POST">
             <label>Text:</label>
             <input type="text" name="text" value="<%= comment.text %>">
             <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i

@@ -14,7 +14,7 @@ function create(req, res) {
             event.comments.push(req.body);
             return event.save()
         })
-        .then((event) => res.redirect(`/events/${event._id}?${message("Add Comment", "green")}`))
+        .then(event => res.redirect(`/events/${event._id}?${message("Add Comment", "green")}`))
         .catch(err => {
             console.log(err);
             res.redirect('/events');
@@ -36,19 +36,29 @@ function deleteComment(req, res) {
         });
 };
 
-function edit (req, res){
+function edit(req, res) {
     Event.findOne({ 'comments._id': req.params.id })
-    .then(event => {
-        console.log(event)
-        const comment = event.comments.find(el => el._id.toString() === req.params.id.toString());
-        console.log(comment)
-        res.render('comments/edit', { title: 'Edit Comment', comment})
-    })
-    .catch(err => res.redirect('/events'));
+        .then(event => {
+            const comment = event.comments.find(el => el._id.toString() === req.params.id.toString());
+            console.log(comment)
+            res.render('comments/edit', { title: 'Edit Comment', comment })
+        })
+        .catch(err => res.redirect('/events'));
 };
 
-function update (req, res){
-
+function update(req, res) {
+    Event.findOne({ 'comments._id': req.params.id })
+        .then(event => {
+            const commentUpdate = event.comments.id(req.params.id);
+            if (!commentUpdate.userId.equals(req.user._id)) return res.redirect(`/events/${event._id}`);
+            commentUpdate.text = req.body.text;
+            return event.save()
+        })
+        .then(event => res.redirect(`/events/${event._id}?${message("Update Comment", "green")}`))
+        .catch(err => {
+            console.log(err);
+            res.redirect('/events');
+        });
 };
 
 
