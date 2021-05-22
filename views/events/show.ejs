@@ -63,15 +63,30 @@
     </div>
     <br>
     <div class="row">
-    <ul class="collection col s6">
-        <li class="collection-item avatar">
-            <img src="" alt="" class="circle">
-            <span class="text">
-                <p>Text</p>
-            </span>
-            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-        </li>
-    </ul>
+        <ul class="collection col s6">
+            <% event.comments.forEach (function (comment) {%>
+                <li class="collection-item avatar">
+                    <% if (comment.UserAvatar) { %>
+                        <img src="<%= comment.userAvatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
+                        <% } else { %>
+                            <i class="small material-icons">perm_identity</i>
+                            <% } %>
+                    <span class="user-name">
+                        <%= comment.userName %>
+                    </span>
+                    <span class="text">
+                        <%= comment.text%>
+                    </span>
+                    <% if (comment.userId.equals(user._id)) { %>
+                        <form action="/events/<%=event._id%>?_method=DELETE" method="POST">
+                          <button type="submit" class="btn red"><i
+                          class="material-icons">clear</i></button>
+                        </form>
+                        <% }%>
+                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                </li>
+                <% }) %>
+        </ul>
     </div>
 
 
