@@ -28,9 +28,12 @@
                         <%= e.hostName %>
                     </td>
                     <td><a href="/events/<%= e._id %>">DETAILS</a></td>
-                    <td> <form action="/events/<%= e._id %>?_method=DELETE" class="delete-form" method="POST">
-                           <button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i
-                            class="material-icons">clear</i>></button> </form></td>
+                    <td>
+                        <form action="/events/<%= e._id %>?_method=DELETE" class="delete-form" method="POST">
+                            <button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i
+                                    class="material-icons">clear</i>></button>
+                        </form>
+                    </td>
                 </tr>
                 <% }); %>
 
@@ -100,6 +103,8 @@
                         <%= e.hostName %>
                     </td>
                     <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                    <td> <a href="/events/<%= e._id %>/join" class="btn-floating btn-large waves-effect waves-light red">Join<i
+                                class="material-icons">add</i></a></td>
                 </tr>
                 <% }); %>
 

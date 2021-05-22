@@ -78,7 +78,23 @@ function deleteEvent(req, res){
     Event.findByIdAndDelete (req.params.id)
     .then(() => res.redirect('/events'))
     .catch(() => res.redirect('/events'))
-}
+};
+
+function addAttendee(req, res){
+    Event.findById(req.params.id)
+    .then((event) => {
+        if (event.hostId.toString()===req.user._id || event.attendees.includes(req.user._id)){
+          res.redirect('/events')  
+        } else {
+            event.attendees.push(req.user._id);
+            event.save()
+            .then ((event) => res.redirect (`/events/${event._id}`))
+            .catch(() => res.redirect('/events'))
+        }  
+    })
+    .catch(() => res.redirect('/events'))
+
+};
 
 module.exports = {
     index,
@@ -88,4 +104,5 @@ module.exports = {
     edit,
     update,
     delete: deleteEvent,
+    addAttendee,
 };
