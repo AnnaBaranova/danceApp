@@ -11,6 +11,7 @@ router.post('/events/:id/comments', isLoggedIn, commentsRouter.create);
 router.delete('/comments/:id', isLoggedIn, commentsRouter.delete)
 router.get('/comments/:id/edit', isLoggedIn, commentsRouter.edit)
 router.put('/comments/:id', isLoggedIn, commentsRouter.update)
+router.get('/comments/:id/like', isLoggedIn, commentsRouter.addRemoveLike)
 
 
 
