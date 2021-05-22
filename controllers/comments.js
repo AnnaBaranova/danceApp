@@ -11,6 +11,7 @@ function create(req, res) {
         .then(event => {
             req.body.userId = req.user._id;
             req.body.userName = req.user.name;
+            req.body.userAvatar = req.user.avatar;
             event.comments.push(req.body);
             return event.save()
         })
