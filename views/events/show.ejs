@@ -47,8 +47,39 @@
         </tbody>
     </table>
     <br>
-    <a href="/events/<%= event._id %>/edit" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">edit</i></a>
+    <a href="/events/<%= event._id %>/edit" class="btn-floating btn-large waves-effect waves-light red"><i
+            class="material-icons">edit</i></a>
+
+    <br>
+    <h5>Comments</h5>
+
+    <div class="row">
+        <form class="col s6" action="/events/<%= event._id %>/comments" method="POST">
+            <input id="textarea1" class="materialize-textarea" name="text">
+            <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i
+                    class="material-icons">send</i>
+            </button>
+        </form>
+    </div>
+    <br>
+    <div class="row">
+    <ul class="collection col s6">
+        <li class="collection-item avatar">
+            <img src="" alt="" class="circle">
+            <span class="text">
+                <p>Text</p>
+            </span>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+        </li>
+    </ul>
+    </div>
+
 
     </body>
+    <% if(message) { %>
+        <script>
+            M.toast({ html: '<%= message %>', classes: 'rounded <%= color %>' });
+        </script>
+        <% } %>
 
-    </html>
+            </html>

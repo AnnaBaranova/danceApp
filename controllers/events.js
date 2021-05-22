@@ -1,6 +1,6 @@
 const Event = require('../models/event');
 
-function message(message, color){
+function message(message, color) {
     return `message=${encodeURIComponent(message)}&color=${color}`;
 }
 
@@ -22,14 +22,15 @@ function index(req, res) {
                 }
             })
 
-            res.render('events', { 
-                title: 'All Events', 
+            res.render('events', {
+                title: 'All Events',
                 // user: req.user, 
-                myEvents, 
-                guestEvents, 
-                otherEvents, 
-                message: req.query.message, 
-                color: req.query.color})
+                myEvents,
+                guestEvents,
+                otherEvents,
+                message: req.query.message,
+                color: req.query.color
+            })
         })
 
         .catch(err => console.log(err))
@@ -37,7 +38,7 @@ function index(req, res) {
 
 
 function newEvent(req, res) {
-    res.render('events/new', { title: 'Add Event'});
+    res.render('events/new', { title: 'Add Event' });
 };
 
 function create(req, res) {
@@ -54,7 +55,12 @@ function show(req, res) {
         .populate('attendees')
         .exec()
         .then(event => {
-            res.render('events/show', { title: 'Show Event', event })
+            res.render('events/show', {
+                title: 'Show Event',
+                event,
+                message: req.query.message,
+                color: req.query.color
+            })
         })
         .catch(err => res.redirect('/events'));
 };
@@ -79,7 +85,7 @@ function update(req, res) {
             event.place = req.body.place;
             return event.save()
         })
-        .then((event) => res.redirect(`/events/${event._id}?${message("Updated","green")}`))
+        .then((event) => res.redirect(`/events/${event._id}?${message("Updated", "green")}`))
         .catch(err => res.redirect('/events'));
 }
 
@@ -97,7 +103,7 @@ function addAttendee(req, res) {
             } else {
                 event.attendees.push(req.user._id);
                 event.save()
-                    .then((event) => res.redirect(`/events?${message("You joined: "+ event.title,"green")}`))
+                    .then((event) => res.redirect(`/events?${message("You joined: " + event.title, "green")}`))
                     .catch(() => res.redirect('/events'))
             }
         })
