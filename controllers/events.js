@@ -8,10 +8,11 @@ function message(message, color) {
 function index(req, res) {
     Event.find({})
         .then(events => {
+            const sortEvents = events.slice().sort((a, b) => b.date - a.date);
             const myEvents = [];
             const guestEvents = [];
             const otherEvents = [];
-            events.forEach(event => {
+            sortEvents.forEach(event => {
                 // console.log(req.user._id.toString() === event.hostId.toString())
                 if (req.user._id.toString() === event.hostId.toString()) {
                     myEvents.push(event);
