@@ -5,7 +5,10 @@ const userSchema = new mongoose.Schema(
     {
         name: String,
         email: String,
-        phone: String,
+        phone: {
+            type: String,
+            match: /\+\d\(\d{3}\)\d{3}-\d{4}/
+        },
         avatar: String,
         googleId: String
     },
