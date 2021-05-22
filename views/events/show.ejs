@@ -71,23 +71,27 @@
                         <% } else { %>
                             <i class="small material-icons">perm_identity</i>
                             <% } %>
-                    <span class="user-name">
-                        <%= comment.userName %>
-                    </span>
-                    <p class="text">
-                        <%= comment.text%>
-                    </p>
-                    <p>Posted: 
-                        <%= comment.createdAt.toISOString().slice(0, 16) %>
-                        <%= comment.updatedAt.toISOString().slice(0, 16) %>
-                    </p>
-                    <% if (comment.userId.equals(user._id)) { %>
-                        <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                          <button type="submit" class="btn red"><i
-                          class="material-icons">clear</i></button>
-                        </form>
-                        <% }%>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                                <span class="user-name">
+                                    <%= comment.userName %>
+                                </span>
+                                <p class="text">
+                                    <%= comment.text%>
+                                </p>
+                                <p>Posted:
+                                    <%= comment.createdAt.toISOString().slice(0, 16) %>
+                                        <%= comment.updatedAt.toISOString().slice(0, 16) %>
+                                </p>
+                                <% if (comment.userId.equals(user._id)) { %>
+                                    <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                        <button type="submit" class="btn waves-effect waves-light red"><i
+                                                class="material-icons">clear</i></button>
+                                    </form>
+                                    <br>
+                                    <a href="/comments/<%= comment._id %>/edit"
+                                            class="btn waves-effect waves-light red"><i
+                                                class="material-icons">edit</i></a> 
+                                    <% }%>
+                                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
                 </li>
                 <% }) %>
         </ul>

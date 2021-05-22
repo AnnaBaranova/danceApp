@@ -36,8 +36,25 @@ function deleteComment(req, res) {
         });
 };
 
+function edit (req, res){
+    Event.findOne({ 'comments._id': req.params.id })
+    .then(event => {
+        console.log(event)
+        const comment = event.comments.find(el => el._id.toString() === req.params.id.toString());
+        console.log(comment)
+        res.render('comments/edit', { title: 'Edit Comment', comment})
+    })
+    .catch(err => res.redirect('/events'));
+};
+
+function update (req, res){
+
+};
+
 
 module.exports = {
     create,
     delete: deleteComment,
+    edit,
+    update,
 }
