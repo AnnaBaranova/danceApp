@@ -5,6 +5,19 @@ console.log(req.user)
     res.render('users/index', { title: 'kizApp', user: req.user});
 };
 
+function show (req, res) {
+    console.log(req.user)
+    User.findById(req.user)
+        .then(user => {
+            res.render('users/show', { title: 'Show Profile', user })
+        })
+        .catch(err => {
+            console.log(err)
+            res.redirect('/events')
+        });
+
+}
 module.exports = {
-    index
+    index,
+    show,
 };

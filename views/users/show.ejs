@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+    <form action="/users/<%=user._id%>?_method=PUT" id="edit-form" method="POST">
+        <img src="<%= user.avatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
+        <br>
+        <label>Name:</label>
+        <input disabled type="text" name="name" value="<%= user.name %>">
+        <label>Email:</label>
+        <input disabled type="text" name="email" value="<%= user.email %>">
+        <label>phone</label>
+        <input type="text" name="phone" value="<%= user.phone %>">
+        <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i class="material-icons">send</i></button>
+    </form>
+    </div>
+
+</body>
+
+</html>

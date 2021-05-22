@@ -8,5 +8,6 @@ function isLoggedIn(req, res, next) {
 };
 
 router.get('/', usersRouter.index)
+router.get('/:id', isLoggedIn,usersRouter.show)
 
 module.exports = router;
