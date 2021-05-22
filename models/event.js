@@ -9,6 +9,9 @@ const commentSchema = new mongoose.Schema(
         },
         userName: String,
         userAvatar: String,
+        likes:[{
+            type: Schema.Types.ObjectId, ref: 'User'
+        }]
     }, {
     timestamps: true,
 }

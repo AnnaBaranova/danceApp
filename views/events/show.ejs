@@ -79,7 +79,9 @@
                                 </p>
                                 <p>Posted:
                                     <%= comment.createdAt.toISOString().slice(0, 16) %>
-                                        <%= comment.updatedAt.toISOString().slice(0, 16) %>
+                                </p>
+                                <p> Updated:
+                                    <%= comment.updatedAt.toISOString().slice(0, 16) %>
                                 </p>
                                 <% if (comment.userId.equals(user._id)) { %>
                                     <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
@@ -88,10 +90,15 @@
                                     </form>
                                     <br>
                                     <a href="/comments/<%= comment._id %>/edit"
-                                            class="btn waves-effect waves-light red"><i
-                                                class="material-icons">edit</i></a> 
-                                    <% }%>
-                                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                                        class="btn waves-effect waves-light red"><i class="material-icons">edit</i></a>
+                                    <% } else {%>
+                                        <a href="/comments/<%= comment._id %>/like" class="secondary-content"><i
+                                                class="material-icons">grade</i></a>
+                                     <% }%>
+                                        <p>Likes:
+                                            <strong>
+                                                <%= comment.likes.length%>
+                                            </strong>
                 </li>
                 <% }) %>
         </ul>

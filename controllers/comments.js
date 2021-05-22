@@ -61,10 +61,34 @@ function update(req, res) {
         });
 };
 
+function addRemoveLike(req, res) {
+    Event.findOne({ 'comments._id': req.params.id })
+        .then((event) => {
+            const commentLike = event.comments.find(el => el._id.toString() === req.params.id.toString());
+            if (commentLike.userId.equals(req.user._id)) {
+                return res.redirect(`/events/${event._id}?${message("it's your comment", "red")}`);
+            } else if (commentLike.likes.includes(req.user._id)) {
+                const newLikes = commentLike.likes.filter(el => el.toString() !== req.user._id.toString());
+                commentLike.likes = newLikes;
+                event.save()
+                    .then((event) => res.redirect(`/events/${event._id}?${message("-1 like", "red")}`))
+                    .catch(() => res.redirect('/events'))
+            } else {
+                commentLike.likes.push(req.user._id);
+                event.save()
+                    .then((event) => res.redirect(`/events/${event._id}?${message("+1 like", "green")}`))
+                    .catch(() => res.redirect('/events'))
+            }
+        })
+        .catch(() => res.redirect('/events'))
+
+};
+
 
 module.exports = {
     create,
     delete: deleteComment,
     edit,
     update,
+    addRemoveLike,
 }
