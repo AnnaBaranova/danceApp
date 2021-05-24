@@ -69,7 +69,11 @@ function show(req, res) {
 function edit(req, res) {
     Event.findById(req.params.id)
         .then(event => {
+            if (!event.hostId.equals(req.user._id)) {
+                return res.redirect(`/events/${event._id}`);
+        } else {
             res.render('events/edit', { title: 'Edit Event', event })
+        }
         })
         .catch(err => res.redirect('/events'));
 

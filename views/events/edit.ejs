@@ -4,7 +4,7 @@
 <div class="container">
 <form action="/events/<%=event._id%>?_method=PUT" id="edit-form" method="POST">
     <label>Title:</label>
-    <input type="text" name="title" value="<%= event.title %>">
+    <input type="text" placeholder="don't start with space :)" name="title" value="<%= event.title %>" required pattern="\w+.*">
     <label>Details:</label>
     <input type="text" name="details" value="<%= event.details %>">
     <label>Limit of Guests:</label>

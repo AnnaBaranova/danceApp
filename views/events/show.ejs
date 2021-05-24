@@ -47,9 +47,10 @@
         </tbody>
     </table>
     <br>
+    <% if(event.hostId.equals(user._id)){%>
     <a href="/events/<%= event._id %>/edit" class="btn-floating btn-large waves-effect waves-light red"><i
             class="material-icons">edit</i></a>
-
+            <% }%>
     <br>
     <h5>Comments</h5>
 
