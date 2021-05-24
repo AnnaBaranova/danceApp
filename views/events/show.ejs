@@ -38,7 +38,9 @@
                 <td>
                     <% event.attendees.forEach(function(el) { %>
                         <li>
-                        <a href="/users/<%= el._id %>"><%= el.name %></a>  
+                            <a href="/users/<%= el._id %>">
+                                <%= el.name %>
+                            </a>
                         </li>
                         <% }); %>
                 </td>
@@ -48,69 +50,84 @@
     </table>
     <br>
     <% if(event.hostId.equals(user._id)){%>
-    <a href="/events/<%= event._id %>/edit" class="btn-floating btn-large waves-effect waves-light red"><i
-            class="material-icons">edit</i></a>
-            <% }%>
-    <br>
-    <h5>Comments</h5>
+        <a href="/events/<%= event._id %>/edit" class="btn-floating btn-large waves-effect waves-light red"><i
+                class="material-icons">edit</i></a>
+        <% }%>
+            <br>
+            <h5>Comments</h5>
 
-    <div class="row">
-        <form class="col s6" action="/events/<%= event._id %>/comments" method="POST">
-            <input id="textarea1" class="materialize-textarea" name="text">
-            <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i
-                    class="material-icons">send</i>
-            </button>
-        </form>
-    </div>
-    <br>
-    <div class="row">
-        <ul class="collection col s6">
-            <% event.comments.forEach (function (comment) {%>
-                <li class="collection-item avatar">
-                    <% if (comment.userAvatar) { %>
-                        <img src="<%= comment.userAvatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
-                        <% } else { %>
-                            <i class="small material-icons">perm_identity</i>
-                            <% } %>
-                                <span class="user-name">
-                                    <%= comment.userName %>
-                                </span>
-                                <p class="text">
-                                    <%= comment.text%>
-                                </p>
-                                <p>Posted:
-                                    <%= comment.createdAt.toISOString().slice(0, 16) %>
-                                </p>
-                                <p> Updated:
-                                    <%= comment.updatedAt.toISOString().slice(0, 16) %>
-                                </p>
-                                <% if (comment.userId.equals(user._id)) { %>
-                                    <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                                        <button type="submit" class="btn waves-effect waves-light red"><i
-                                                class="material-icons">clear</i></button>
+            <div class="row">
+                <form class="col s6" action="/events/<%= event._id %>/comments" method="POST">
+                    <input id="textarea1" class="materialize-textarea" name="text">
+                    <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i
+                            class="material-icons">send</i>
+                    </button>
+                </form>
+            </div>
+            <br>
+            <div class="row">
+                <ul class="collection col s6">
+                    <% event.comments.forEach (function (comment) {%>
+                        <li>
+                            <div class="container collection-item avatar" style="display: block">
+                                <% if (comment.userAvatar) { %>
+                                    <img src="<%= comment.userAvatar %>" alt=""
+                                        class="circle responsive-img">&nbsp;&nbsp;
+                                    <% } else { %>
+                                        <i class="small material-icons">perm_identity</i>
+                                        <% } %>
+                                            <span class="user-name">
+                                                <%= comment.userName %>
+                                            </span>
+                                            <p class="text">
+                                                <%= comment.text%>
+                                            </p>
+                                            <p>Posted:
+                                                <%= comment.createdAt.toISOString().slice(0, 16) %>
+                                            </p>
+                                            <p> Updated:
+                                                <%= comment.updatedAt.toISOString().slice(0, 16) %>
+                                            </p>
+                                            <% if (comment.userId.equals(user._id)) { %>
+                                                <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                                    <button type="submit" class="btn waves-effect waves-light red"><i
+                                                            class="material-icons">clear</i></button>
+                                                </form>
+                                                <br>
+                                                <a href="/comments/<%= comment._id %>/edit"
+                                                    class="btn waves-effect waves-light red"><i
+                                                        class="material-icons">edit</i></a>
+                                                <% } else {%>
+                                                    <a href="/comments/<%= comment._id %>/like"
+                                                        class="secondary-content"><i
+                                                            class="material-icons">grade</i></a>
+                                                    <% }%>
+                                                        <p>Likes:
+                                                            <strong>
+                                                                <%= comment.likes.length%>
+                                                            </strong>
+                            </div>
+                            <% if (comment.userId.equals(user._id)) { %>
+                                <div class="container" style="display: none">
+                                    <form action="/comments/<%=comment._id%>?_method=PUT" id="edit-form" method="POST">
+                                        <label>Text:</label>
+                                        <input type="text" name="text" value="<%= comment.text %>">
+                                        <button class="btn-floating btn-large waves-effect waves-light red"
+                                            type="submit"><i class="material-icons">send</i></button>
                                     </form>
-                                    <br>
-                                    <a href="/comments/<%= comment._id %>/edit"
-                                        class="btn waves-effect waves-light red"><i class="material-icons">edit</i></a>
-                                    <% } else {%>
-                                        <a href="/comments/<%= comment._id %>/like" class="secondary-content"><i
-                                                class="material-icons">grade</i></a>
-                                     <% }%>
-                                        <p>Likes:
-                                            <strong>
-                                                <%= comment.likes.length%>
-                                            </strong>
-                </li>
-                <% }) %>
-        </ul>
-    </div>
+                                </div>
+                                <% }%>
+                        </li>
+                        <% }) %>
+                </ul>
+            </div>
 
 
-    </body>
-    <% if(message) { %>
-        <script>
-            M.toast({ html: '<%= message %>', classes: 'rounded <%= color %>' });
-        </script>
-        <% } %>
+            </body>
+            <% if(message) { %>
+                <script>
+                    M.toast({ html: '<%= message %>', classes: 'rounded <%= color %>' });
+                </script>
+                <% } %>
 
-            </html>
+                    </html>
