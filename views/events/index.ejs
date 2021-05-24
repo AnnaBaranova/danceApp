@@ -1,5 +1,7 @@
 <%- include('../partials/header') %>
 
+<div class="container">
+
     <h3>I am a Host</h3>
     <% if (myEvents.length) { %>
     <table>
@@ -124,7 +126,7 @@
     <% } else { %>
         <h5><i class="medium material-icons">sentiment_very_dissatisfied</i>No more Events</h5>
         <% } %>
-
+</div>
     </body>
     <% if(message) { %>
     <script>
@@ -132,4 +134,4 @@
     </script>
     <% } %>
     
-    </html>
+   

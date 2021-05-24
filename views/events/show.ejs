@@ -2,7 +2,7 @@
     <h3>
         <%= event.title %>
     </h3>
-
+<div class="container">
     <table>
         <thead>
             <tr>
@@ -53,10 +53,10 @@
         <a href="/events/<%= event._id %>/edit" class="btn-floating btn-large waves-effect waves-light red"><i
                 class="material-icons">edit</i></a>
         <% }%>
-            <br>
-            <h5>Comments</h5>
 
-            <div class="row">
+</div>
+            <div class="row container">
+                <h5>Comments</h5>
                 <form class="col s6" action="/events/<%= event._id %>/comments" method="POST">
                     <input id="textarea1" class="materialize-textarea" name="text">
                     <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i
@@ -65,8 +65,8 @@
                 </form>
             </div>
             <br>
-            <div class="row">
-                <ul class="collection col s6">
+            <div class="row container">
+                <ul class="collection col s12">
                     <% event.comments.forEach (function (comment) {%>
                         <li>
                             <div id="show-<%= comment._id %>" class="container collection-item avatar"
@@ -162,4 +162,7 @@
                         }
                     </script>
 
-                    </html>
+
+<%- include('../partials/footer') %>
+
+               
