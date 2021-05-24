@@ -46,6 +46,21 @@ function edit(req, res) {
         .catch(err => res.redirect('/events'));
 };
 
+// function update(req, res) {
+//     Event.findOne({ 'comments._id': req.params.id })
+//         .then(event => {
+//             const commentUpdate = event.comments.id(req.params.id);
+//             if (!commentUpdate.userId.equals(req.user._id)) return res.redirect(`/events/${event._id}`);
+//             commentUpdate.text = req.body.text;
+//             return event.save()
+//         })
+//         .then(event => res.redirect(`/events/${event._id}?${message("Update Comment", "green")}`))
+//         .catch(err => {
+//             console.log(err);
+//             res.redirect('/events');
+//         });
+// };
+
 function update(req, res) {
     Event.findOne({ 'comments._id': req.params.id })
         .then(event => {
@@ -54,10 +69,10 @@ function update(req, res) {
             commentUpdate.text = req.body.text;
             return event.save()
         })
-        .then(event => res.redirect(`/events/${event._id}?${message("Update Comment", "green")}`))
+        .then(event => res.status(200).send(event))
         .catch(err => {
             console.log(err);
-            res.redirect('/events');
+            res.status(500).send({ error: "err" });
         });
 };
 
@@ -91,4 +106,5 @@ module.exports = {
     edit,
     update,
     addRemoveLike,
+    // updatePatch,
 }
