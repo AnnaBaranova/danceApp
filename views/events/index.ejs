@@ -22,7 +22,7 @@
                         <%= e.date.toISOString().slice(0, 16) %>
                     </td>
                     <td>
-                        <%= e.guestLimit %>
+                        <%= e.attendees.length %>/<%= e.guestLimit %>
                     </td>
                     <td>
                         <%= e.hostName %>
@@ -67,7 +67,7 @@
                         <%= e.date.toISOString().slice(0, 16) %>
                     </td>
                     <td>
-                        <%= e.guestLimit %>
+                        <%= e.attendees.length %>/<%= e.guestLimit %>
                     </td>
                     <td>
                         <%= e.hostName %>
@@ -106,7 +106,7 @@
                         <%= e.date.toISOString().slice(0, 16) %>
                     </td>
                     <td>
-                        <%= e.guestLimit %>
+                        <%= e.attendees.length %>/<%= e.guestLimit %>
                     </td>
                     <td>
                         <%= e.hostName %>

@@ -33,7 +33,7 @@
                     <%= event.hostName%>
                 </td>
                 <td>
-                    <%= event.guestLimit %>
+                    <%= event.attendees.length %>/<%= event.guestLimit %>
                 </td>
                 <td>
                     <% event.attendees.forEach(function(el) { %>
