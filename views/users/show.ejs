@@ -1,38 +1,38 @@
 <%- include('../partials/header') %>
 
-    <% if(user) {%>
+    <% if(user._id.equals(profile._id)){%>
         <h3>My Profile</h3>
         <div class="container">
-            <form action="/users/<%=user._id%>?_method=PUT" id="edit-form" method="POST">
-                <img src="<%= user.avatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
+            <form action="/users/<%=profile._id%>?_method=PUT" id="edit-form" method="POST">
+                <img src="<%= profile.avatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
                 <br>
                 <label>Name:</label>
-                <input disabled type="text" name="name" value="<%= user.name %>">
+                <input disabled type="text" name="name" value="<%= profile.name %>">
                 <label>Email:</label>
-                <input disabled type="text" name="email" value="<%= user.email %>">
+                <input disabled type="text" name="email" value="<%= profile.email %>">
                 <label>phone</label>
                 <input placeholder="+1(123)123-1234" type="text" name="phone" required
-                    pattern="\+\d\(\d{3}\)\d{3}-\d{4}" value="<%= user.phone %>">
+                    pattern="\+\d\(\d{3}\)\d{3}-\d{4}" value="<%= profile.phone %>">
                 <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i
                         class="material-icons">send</i></button>
             </form>
         </div>
         <% } else { %>
             <h3>User's Profile</h3>
-            <img src="<%= user.avatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
+            <img src="<%= profile.avatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
             <table>
                 <thead>
                     <tr>
                         <th>Details</th>
                     </tr>
                     <tr>
-                        <th><%= user.name %></th>
+                        <th><%= profile.name %></th>
                     </tr>
                     <tr>
-                        <th><%= user.email %></th>
+                        <th><%= profile.email %></th>
                     </tr>
                     <tr>
-                        <th><%= user.phone%></th>
+                        <th><%= profile.phone%></th>
                     </tr>
                 </thead>
                 <tbody>

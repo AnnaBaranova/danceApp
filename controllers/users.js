@@ -10,11 +10,11 @@ function index(req, res, next) {
 };
 
 function show(req, res) {
-    User.findById(req.user)
-        .then(user => {
+    User.findById(req.params.id)
+        .then(profile => {
             res.render('users/show', { 
                 title: 'Show Profile', 
-                user,
+                profile,
                 message: req.query.message,
                 color: req.query.color
              })

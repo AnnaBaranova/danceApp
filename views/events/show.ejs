@@ -38,7 +38,7 @@
                 <td>
                     <% event.attendees.forEach(function(el) { %>
                         <li>
-                            <%= el.name %>
+                        <a href="/users/<%= el._id %>"><%= el.name %></a>  
                         </li>
                         <% }); %>
                 </td>
