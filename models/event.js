@@ -22,7 +22,7 @@ const eventSchema = new mongoose.Schema(
         title: {
             type: String,
             required: true,
-            unique: true,
+            match: /\w+/,
         },
         hostId: {
             type: Schema.Types.ObjectId, ref: 'User'
