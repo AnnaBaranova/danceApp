@@ -112,8 +112,10 @@
                         <%= e.hostName %>
                     </td>
                     <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                    <% if (e.attendees.length !== e.guestLimit) { %>
                     <td> <a href="/events/<%= e._id %>/join" class="btn-floating btn-large waves-effect waves-light green">Join<i
                                 class="material-icons">add</i></a></td>
+                                <% } %>
                 </tr>
                 <% }); %>
 

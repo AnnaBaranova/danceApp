@@ -102,10 +102,14 @@ function addAttendee(req, res) {
             if (event.hostId.toString() === req.user._id || event.attendees.includes(req.user._id)) {
                 res.redirect('/events')
             } else {
+                if(event.attendees.length < event.guestLimit){
                 event.attendees.push(req.user._id);
                 event.save()
                     .then((event) => res.redirect(`/events?${message("You joined: " + event.title, "green")}`))
                     .catch(() => res.redirect('/events'))
+                } else {
+                    res.redirect(`/events?${message("Sorry! No spots left " + event.title, "red")}`)
+                }
             }
         })
         .catch(() => res.redirect('/events'))

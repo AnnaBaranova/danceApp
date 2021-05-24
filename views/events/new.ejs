@@ -1,22 +1,23 @@
 <%- include('../partials/header') %>
 
 
-<div class="container">
-<form action="/events" id="new-form" method="POST">
-    <label>Title:</label>
-    <input type="text" name="title">
-    <label>Details:</label>
-    <input type="text" name="details">
-    <label>Limit of Guests:</label>
-    <input type="number" name="guestLimit" value="6">
-    <label>Date:</label>
-    <input type="datetime-local" name="date" value="<%= (new Date()).toISOString().slice(0, 16)%>">
-    <label>Place:</label>
-    <input type="text" name="place">
-    <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i class="material-icons">send</i></button>
-</form>
-</div>
+    <div class="container">
+        <form action="/events" id="new-form" method="POST">
+            <label>Title:</label>
+            <input placeholder="don't start with space :)" type="text" name="title" required pattern="\w+">
+            <label>Details:</label>
+            <input type="text" name="details">
+            <label>Limit of Guests:</label>
+            <input type="number" name="guestLimit" value="6">
+            <label>Date:</label>
+            <input type="datetime-local" name="date" value="<%= (new Date()).toISOString().slice(0, 16)%>">
+            <label>Place:</label>
+            <input type="text" name="place">
+            <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i
+                    class="material-icons">send</i></button>
+        </form>
+    </div>
 
-</body>
+    </body>
 
-</html>
+    </html>
