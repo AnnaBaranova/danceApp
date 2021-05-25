@@ -58,7 +58,7 @@
             <div class="row container">
                 <h5>Comments</h5>
                 <form class="col s6" action="/events/<%= event._id %>/comments" method="POST">
-                    <input id="textarea1" class="materialize-textarea" name="text">
+                    <input id="textarea1" class="materialize-textarea" name="text" required pattern="\w+.*">
                     <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i
                             class="material-icons">send</i>
                     </button>
@@ -116,7 +116,7 @@
                                     <!-- <form action="/comments/<%=comment._id%>?_method=PUT" id="edit-form" method="POST"> -->
                                         <!-- <label>Text:</label> -->
                                         <h6>Text:</h6>
-                                        <input id="comment-<%=comment._id%>" type="text" name="text" value="<%= comment.text %>">
+                                        <input id="comment-<%=comment._id%>" type="text" name="text" value="<%= comment.text %>" required pattern="\w+.*">
                                         <!-- <button class="btn-floating btn-large waves-effect waves-light red"
                                             type="submit"><i class="material-icons">send</i></button> -->
                                         <button onclick="submitComment(`<%=event._id%>`,`<%=comment._id%>`)"
