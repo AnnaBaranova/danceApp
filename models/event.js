@@ -12,7 +12,7 @@ const commentSchema = new mongoose.Schema(
         },
         userName: String,
         userAvatar: String,
-        likes:[{
+        likes: [{
             type: Schema.Types.ObjectId, ref: 'User'
         }]
     }, {
@@ -26,16 +26,30 @@ const eventSchema = new mongoose.Schema(
             type: String,
             required: true,
             match: /\w+.*/,
+            trim: true,
         },
         hostId: {
             type: Schema.Types.ObjectId, ref: 'User'
         },
         hostName: String,
-        date: Date,
+        date: {
+            type: Date,
+            min() {
+                let day = new Date();
+                day.setDate(day.getDate() + 1)
+                return day
+            },
+            max() {
+                let day = new Date();
+                day.setMonth(day.getMonth() + 3)
+                return day
+            },
+            required: true,
+        },
         place: String,
         guestLimit: {
             type: Number,
-            min: 1,
+            min:1,
             default: 6
         },
         details: String,

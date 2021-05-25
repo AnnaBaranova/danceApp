@@ -52,7 +52,7 @@ function create(req, res) {
     event.hostName = req.user.name;
     event.save()
         .then(() => res.redirect(`/events?${message("Created", "green")}`))
-        .catch(err => res.redirect('/events/new'));
+        .catch(err => res.redirect(`/events/new?${message("Sorry! Check info! You want to submit: " + event.title, "red")}`));
 };
 
 function show(req, res) {
@@ -67,7 +67,7 @@ function show(req, res) {
                 color: req.query.color
             })
         })
-        .catch(err => res.redirect('/events'));
+        .catch(err => res.redirect(`/events${message("Sorry! Cannot show an event", "red")}`));
 };
 
 function edit(req, res) {
@@ -84,7 +84,7 @@ function edit(req, res) {
                 })
             }
         })
-        .catch(err => res.redirect('/events'));
+        .catch(err => res.redirect(`/events${message("Sorry! You cannot edit the event", "red")}`));
 
 };
 
@@ -100,13 +100,13 @@ function update(req, res) {
             return event.save()
         })
         .then((event) => res.redirect(`/events/${event._id}?${message("Updated", "green")}`))
-        .catch(err => res.redirect('/events'));
+        .catch(err => res.redirect(`/events${message("Sorry! You cannot update the event", "red")}`));
 }
 
 function deleteEvent(req, res) {
     Event.findByIdAndDelete(req.params.id)
         .then(() => res.redirect(`/events?${message("Deleted", "red")}`))
-        .catch(() => res.redirect('/events'))
+        .catch(() => res.redirect(`/events${message("Sorry! You cannot delete the event", "red")}`));
 };
 
 function addAttendee(req, res) {

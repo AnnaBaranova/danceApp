@@ -9,8 +9,10 @@
     <input type="text" name="details" value="<%= event.details %>">
     <label>Limit of Guests:</label>
     <input type="number" name="guestLimit" value="<%= event.guestLimit %>">
-    <label>Date:</label>
-    <input type="datetime-local" name="date" value="<%= event.date.toISOString().slice(0, 16)%>">
+    <label>Date:<span> "Choose at least 1 day from now and not more than 90 days"</span></label>
+            <input min="<%= new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().slice(0, 16)%>"
+            max="<%= new Date(new Date().setMonth(new Date().getMonth() + 3)).toISOString().slice(0, 16)%>"
+             type="datetime-local" name="date" value="">
     <label>Place:</label>
     <input type="text" name="place" value="<%= event.place %>">
     <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i class="material-icons">send</i></button>
