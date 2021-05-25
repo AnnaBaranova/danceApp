@@ -12,14 +12,20 @@ function index(req, res) {
             const myEvents = [];
             const guestEvents = [];
             const otherEvents = [];
+            const pastEvents = [];
             sortEvents.forEach(event => {
-                // console.log(req.user._id.toString() === event.hostId.toString())
-                if (req.user._id.toString() === event.hostId.toString()) {
-                    myEvents.push(event);
-                } else if (event.attendees.includes(req.user._id)) {
-                    guestEvents.push(event);
+                let day = new Date();
+                if (event.date.getTime() > day.getTime()) {
+                    if (req.user._id.toString() === event.hostId.toString()) {
+                        myEvents.push(event);
+                    } else if (event.attendees.includes(req.user._id)) {
+                        guestEvents.push(event);
+                    } else {
+                        otherEvents.push(event)
+                    }
                 } else {
-                    otherEvents.push(event)
+                    pastEvents.push(event)
+                    console.log(event)
                 }
             })
 
@@ -29,6 +35,7 @@ function index(req, res) {
                 myEvents,
                 guestEvents,
                 otherEvents,
+                pastEvents,
                 message: req.query.message,
                 color: req.query.color
             })

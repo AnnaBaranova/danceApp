@@ -126,6 +126,43 @@
     <% } else { %>
         <h5><i class="medium material-icons">sentiment_very_dissatisfied</i>No more Events</h5>
         <% } %>
+        <br>
+    <h3>Past Events</h3>
+    <% if (pastEvents.length) { %>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>GuestLimit</th>
+                <th>Host</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <% pastEvents.forEach(function(e) { %>
+                <tr>
+                    <td>
+                        <%= e.title%>
+                    </td>
+                    <td>
+                        <%= e.date.toISOString().slice(0, 16) %>
+                    </td>
+                    <td>
+                        <%= e.attendees.length %>/<%= e.guestLimit %>
+                    </td>
+                    <td>
+                        <%= e.hostName %>
+                    </td>
+                    <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                </tr>
+                <% }); %>
+
+        </tbody>
+    </table>
+    <% } else { %>
+        <h5><i class="medium material-icons">sentiment_very_dissatisfied</i>No past Events</h5>
+        <% } %>
 </div>
 
 
