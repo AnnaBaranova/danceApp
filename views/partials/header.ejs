@@ -6,7 +6,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Materialize CSS Framework -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
     <title>
         <%= title %>
     </title>
@@ -14,31 +16,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </head>
+
 <body>
     <header>
-    <div class="navbar-fixed">
-        <nav>
-            <div class="nav-wrapper">
-                <a href="" class="brand-logo left">KizMe</a>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="" class="brand-logo left">KizMe</a>
 
-                <ul class="right">
+                    <ul class="right">
 
-                    <li>
-                        <% if (user) { %>
-                    <li><a href="/events">All Events</a></li>        
-                    <li><a href="/users/<%= user._id %>">My Profile</a></li>
-                    <li><a href="/logout"><i class="material-icons left">trending_flat</i>Log Out</a>
-                    </li>
-                    <% } else { %>
-                        <a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a>
-                        <% } %>
-                            </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+                        <li>
+                            <% if (user) { %>
+                        <li><a href="/events">All Events</a></li>
+                        <li><a href="/users/<%= user._id %>">My Profile</a></li>
+                        <li><a href="/logout"><i class="material-icons left">trending_flat</i>Log Out</a>
+                        </li>
+                        <% } else { %>
+                            <a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a>
+                            <% } %>
+                                </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </header>
     <main>
-
-      
- 

@@ -32,7 +32,7 @@
                     <td><a href="/events/<%= e._id %>">DETAILS</a></td>
                     <td>
                         <form action="/events/<%= e._id %>?_method=DELETE" class="delete-form" method="POST">
-                            <button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i
+                            <button type="submit" class="btn-floating btn-small waves-effect waves-light red"><i
                                     class="material-icons">clear</i>></button>
                         </form>
                     </td>
@@ -44,7 +44,7 @@
         <h5>You are not a host yet</h5>
         <% } %>
     <br>
-    <a href="/events/new" class="btn-floating btn-large waves-effect waves-light red"><i
+    <a href="/events/new" class="btn-floating btn-large waves-effect waves-light red pulse"><i
             class="material-icons">add</i></a>
     <br>
     <h3>I am a Guest</h3>
@@ -75,7 +75,7 @@
                         <%= e.hostName %>
                     </td>
                     <td><a href="/events/<%= e._id %>">DETAILS</a></td>
-                    <td> <a href="/events/<%= e._id %>/leave" class="btn-floating btn-large waves-effect waves-light red">Leave<i
+                    <td> <a href="/events/<%= e._id %>/leave" class="btn-floating btn-small waves-effect waves-light red">Leave<i
                         class="material-icons">add</i></a></td>
                 </tr>
                 <% }); %>
@@ -115,7 +115,7 @@
                     </td>
                     <td><a href="/events/<%= e._id %>">DETAILS</a></td>
                     <% if (e.attendees.length !== e.guestLimit) { %>
-                    <td> <a href="/events/<%= e._id %>/join" class="btn-floating btn-large waves-effect waves-light green">Join<i
+                    <td> <a href="/events/<%= e._id %>/join" class="btn-floating btn-small waves-effect waves-light green pulse">Join<i
                                 class="material-icons">add</i></a></td>
                                 <% } %>
                 </tr>
