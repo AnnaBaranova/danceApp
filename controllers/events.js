@@ -39,7 +39,11 @@ function index(req, res) {
 
 
 function newEvent(req, res) {
-    res.render('events/new', { title: 'Add Event' });
+    res.render('events/new', {
+        title: 'Add Event',
+        message: req.query.message,
+        color: req.query.color
+    });
 };
 
 function create(req, res) {

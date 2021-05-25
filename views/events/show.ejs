@@ -90,16 +90,13 @@
                                     </p>
                                     <% if (comment.userId.equals(user._id)) { %>
                                         <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                                            <button type="submit" class="btn waves-effect waves-light red"><i
+                                            <button type="submit" class="btn-floating btn-small waves-effect waves-light red"><i
                                                     class="material-icons">clear</i></button>
                                         </form>
                                         <br>
-                                        <!-- <a href="/comments/<%= comment._id %>/edit"
-                                                    class="btn waves-effect waves-light red"><i
-                                                        class="material-icons">edit</i></a> -->
                                         <button onclick="editComment(`<%=comment._id%>`)"
-                                            class="btn-floating btn-large waves-effect waves-light blue"><i
-                                                class="material-icons">send</i></button>
+                                            class="btn-floating btn-small waves-effect waves-light red"><i
+                                                class="material-icons">edit</i></button>
                                         <% } else {%>
                                             <a href="/comments/<%= comment._id %>/like" class="secondary-content"><i
                                                     class="material-icons">grade</i></a>
@@ -111,15 +108,13 @@
                     </div>
                     <% if (comment.userId.equals(user._id)) { %>
                         <div id="edit-<%= comment._id %>" class="container" style="display: none">
-                            <!-- <form action="/comments/<%=comment._id%>?_method=PUT" id="edit-form" method="POST"> -->
-                            <!-- <label>Text:</label> -->
+                           
                             <h6>Text:</h6>
                             <input id="comment-<%=comment._id%>" type="text" name="text" value="<%= comment.text %>"
                                 required pattern="\w+.*">
-                            <!-- <button class="btn-floating btn-large waves-effect waves-light red"
-                                            type="submit"><i class="material-icons">send</i></button> -->
+                            
                             <button onclick="submitComment(`<%=event._id%>`,`<%=comment._id%>`)"
-                                class="btn-floating btn-large waves-effect waves-light blue"><i
+                                class="btn-floating btn-small waves-effect waves-light red"><i
                                     class="material-icons">send</i></button>
                             <!-- </form> -->
                         </div>
