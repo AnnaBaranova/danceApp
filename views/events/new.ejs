@@ -7,7 +7,7 @@
             <input placeholder="don't start with space :)" type="text" name="title" required pattern="\w+.*">
             <label>Details:</label>
             <input type="text" name="details">
-            <label>Limit of Guests:</label>
+            <label>Limit of Guests:<span> "at least 2 people"</span></label>
             <input type="number" name="guestLimit" value="6">
             <label>Date:<span> "Choose at least 1 day from now and not more than 90 days"</span></label>
             <input min="<%= new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().slice(0, 16)%>"

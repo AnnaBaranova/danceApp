@@ -49,8 +49,8 @@ const eventSchema = new mongoose.Schema(
         place: String,
         guestLimit: {
             type: Number,
-            min:1,
-            default: 6
+            min:2,
+            default: 6,
         },
         details: String,
         attendees: [{ type: Schema.Types.ObjectId, ref: 'User' }],
