@@ -41,7 +41,12 @@ function edit(req, res) {
         .then(event => {
             const comment = event.comments.find(el => el._id.toString() === req.params.id.toString());
             console.log(comment)
-            res.render('comments/edit', { title: 'Edit Comment', comment })
+            res.render('comments/edit', {
+                title: 'Edit Comment',
+                comment,
+                message: req.query.message,
+                color: req.query.color
+            })
         })
         .catch(err => res.redirect('/events'));
 };

@@ -1,10 +1,42 @@
+</main>
 <footer class="page-footer">
     <div class="footer-copyright">
-      <div class="container">
-      © 2021 
-      <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
-      </div>
+        <div class="container">
+            © 2021 Anna Baranova
+            <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+        </div>
     </div>
-  </footer>
+</footer>
+</body>
+<% if (message) { %>
+    <script>
+        M.toast({ html: '<%= message %>', classes: 'rounded <%= color %>' });
+    </script>
+    <% } %>
+        <script>
+            function editComment(commentId) {
+                document.getElementById("edit-" + commentId).style.display = "block";
+                document.getElementById("show-" + commentId).style.display = "none"
+            };
+            async function submitComment(eventId, commentId) {
+                const text = document.getElementById("comment-" + commentId).value.trim();
+                if (text) {
+                    const response = await fetch(`http://localhost:3000/comments/${commentId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            text
+                        })
+                    })
+                    const newComment = await response.json();
+                    console.log(newComment);
+                    document.getElementById("comment-text-" + commentId).innerText = text;
+                    document.getElementById("edit-" + commentId).style.display = "none";
+                    document.getElementById("show-" + commentId).style.display = "block"
+                    M.toast({ html: 'Comment updated', classes: 'rounded green' });
 
-  </html>
+                }
+            }
+        </script>
+
+</html>

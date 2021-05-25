@@ -1,168 +1,133 @@
 <%- include('../partials/header') %>
+<div class="container"> 
     <h3>
         <%= event.title %>
     </h3>
-<div class="container">
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Details</th>
-                <th>Date</th>
-                <th>Place</th>
-                <th>Host</th>
-                <th>GuestLimit</th>
-                <th>Attendees</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <%= event.title%>
-                </td>
-                <td>
-                    <%= event.details%>
-                </td>
-                <td>
-                    <%= event.date.toISOString().slice(0, 16) %>
-                </td>
-                <td>
-                    <%= event.place%>
-                </td>
-                <td>
-                    <%= event.hostName%>
-                </td>
-                <td>
-                    <%= event.attendees.length %>/<%= event.guestLimit %>
-                </td>
-                <td>
-                    <% event.attendees.forEach(function(el) { %>
-                        <li>
-                            <a href="/users/<%= el._id %>">
-                                <%= el.name %>
-                            </a>
-                        </li>
-                        <% }); %>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
     <br>
-    <% if(event.hostId.equals(user._id)){%>
-        <a href="/events/<%= event._id %>/edit" class="btn-floating btn-large waves-effect waves-light red"><i
-                class="material-icons">edit</i></a>
-        <% }%>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Details</th>
+                    <th>Date</th>
+                    <th>Place</th>
+                    <th>Host</th>
+                    <th>GuestLimit</th>
+                    <th>Attendees</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <%= event.title%>
+                    </td>
+                    <td>
+                        <%= event.details%>
+                    </td>
+                    <td>
+                        <%= event.date.toISOString().slice(0, 16) %>
+                    </td>
+                    <td>
+                        <%= event.place%>
+                    </td>
+                    <td>
+                        <%= event.hostName%>
+                    </td>
+                    <td>
+                        <%= event.attendees.length %>/<%= event.guestLimit %>
+                    </td>
+                    <td>
+                        <% event.attendees.forEach(function(el) { %>
+                            <li>
+                                <a href="/users/<%= el._id %>">
+                                    <%= el.name %>
+                                </a>
+                            </li>
+                            <% }); %>
+                    </td>
+                </tr>
 
-</div>
-            <div class="row container">
-                <h5>Comments</h5>
-                <form class="col s6" action="/events/<%= event._id %>/comments" method="POST">
-                    <input id="textarea1" class="materialize-textarea" name="text" required pattern="\w+.*">
-                    <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i
-                            class="material-icons">send</i>
-                    </button>
-                </form>
-            </div>
-            <br>
-            <div class="row container">
-                <ul class="collection col s12">
-                    <% event.comments.forEach (function (comment) {%>
-                        <li>
-                            <div id="show-<%= comment._id %>" class="container collection-item avatar"
-                                style="display: block">
-                                <% if (comment.userAvatar) { %>
-                                    <img src="<%= comment.userAvatar %>" alt=""
-                                        class="circle responsive-img">&nbsp;&nbsp;
-                                    <% } else { %>
-                                        <i class="small material-icons">perm_identity</i>
-                                        <% } %>
-                                            <span class="user-name">
-                                                <%= comment.userName %>
-                                            </span>
-                                            <p id="comment-text-<%=comment._id%>" class="text">
-                                                <%= comment.text%>
-                                            </p>
-                                            <p>Posted:
-                                                <%= comment.createdAt.toISOString().slice(0, 16) %>
-                                            </p>
-                                            <p> Updated:
-                                                <%= comment.updatedAt.toISOString().slice(0, 16) %>
-                                            </p>
-                                            <% if (comment.userId.equals(user._id)) { %>
-                                                <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                                                    <button type="submit" class="btn waves-effect waves-light red"><i
-                                                            class="material-icons">clear</i></button>
-                                                </form>
-                                                <br>
-                                                <!-- <a href="/comments/<%= comment._id %>/edit"
+            </tbody>
+        </table>
+        <br>
+        <% if(event.hostId.equals(user._id)){%>
+            <a href="/events/<%= event._id %>/edit" class="btn-floating btn-large waves-effect waves-light red"><i
+                    class="material-icons">edit</i></a>
+            <% }%>
+
+    </div>
+    <div class="row container">
+        <h5>Comments</h5>
+        <form class="col s6" action="/events/<%= event._id %>/comments" method="POST">
+            <input id="textarea1" class="materialize-textarea" name="text" required pattern="\w+.*">
+            <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i
+                    class="material-icons">send</i>
+            </button>
+        </form>
+    </div>
+    <br>
+    <div class="row container">
+        <ul class="collection col s12">
+            <% event.comments.forEach (function (comment) {%>
+                <li>
+                    <div id="show-<%= comment._id %>" class="container collection-item avatar" style="display: block">
+                        <% if (comment.userAvatar) { %>
+                            <img src="<%= comment.userAvatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
+                            <% } else { %>
+                                <i class="small material-icons">perm_identity</i>
+                                <% } %>
+                                    <span class="user-name">
+                                        <%= comment.userName %>
+                                    </span>
+                                    <p id="comment-text-<%=comment._id%>" class="text">
+                                        <%= comment.text%>
+                                    </p>
+                                    <p>Posted:
+                                        <%= comment.createdAt.toISOString().slice(0, 16) %>
+                                    </p>
+                                    <p> Updated:
+                                        <%= comment.updatedAt.toISOString().slice(0, 16) %>
+                                    </p>
+                                    <% if (comment.userId.equals(user._id)) { %>
+                                        <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                            <button type="submit" class="btn waves-effect waves-light red"><i
+                                                    class="material-icons">clear</i></button>
+                                        </form>
+                                        <br>
+                                        <!-- <a href="/comments/<%= comment._id %>/edit"
                                                     class="btn waves-effect waves-light red"><i
                                                         class="material-icons">edit</i></a> -->
-                                                <button onclick="editComment(`<%=comment._id%>`)"
-                                                    class="btn-floating btn-large waves-effect waves-light blue"><i
-                                                        class="material-icons">send</i></button>
-                                                <% } else {%>
-                                                    <a href="/comments/<%= comment._id %>/like"
-                                                        class="secondary-content"><i
-                                                            class="material-icons">grade</i></a>
-                                                    <% }%>
-                                                        <p>Likes:
-                                                            <strong>
-                                                                <%= comment.likes.length%>
-                                                            </strong>
-                            </div>
-                            <% if (comment.userId.equals(user._id)) { %>
-                                <div id="edit-<%= comment._id %>" class="container" style="display: none">
-                                    <!-- <form action="/comments/<%=comment._id%>?_method=PUT" id="edit-form" method="POST"> -->
-                                        <!-- <label>Text:</label> -->
-                                        <h6>Text:</h6>
-                                        <input id="comment-<%=comment._id%>" type="text" name="text" value="<%= comment.text %>" required pattern="\w+.*">
-                                        <!-- <button class="btn-floating btn-large waves-effect waves-light red"
-                                            type="submit"><i class="material-icons">send</i></button> -->
-                                        <button onclick="submitComment(`<%=event._id%>`,`<%=comment._id%>`)"
+                                        <button onclick="editComment(`<%=comment._id%>`)"
                                             class="btn-floating btn-large waves-effect waves-light blue"><i
                                                 class="material-icons">send</i></button>
-                                    <!-- </form> -->
-                                </div>
-                                <% }%>
-                        </li>
-                        <% }) %>
-                </ul>
-            </div>
+                                        <% } else {%>
+                                            <a href="/comments/<%= comment._id %>/like" class="secondary-content"><i
+                                                    class="material-icons">grade</i></a>
+                                            <% }%>
+                                                <p>Likes:
+                                                    <strong>
+                                                        <%= comment.likes.length%>
+                                                    </strong>
+                    </div>
+                    <% if (comment.userId.equals(user._id)) { %>
+                        <div id="edit-<%= comment._id %>" class="container" style="display: none">
+                            <!-- <form action="/comments/<%=comment._id%>?_method=PUT" id="edit-form" method="POST"> -->
+                            <!-- <label>Text:</label> -->
+                            <h6>Text:</h6>
+                            <input id="comment-<%=comment._id%>" type="text" name="text" value="<%= comment.text %>"
+                                required pattern="\w+.*">
+                            <!-- <button class="btn-floating btn-large waves-effect waves-light red"
+                                            type="submit"><i class="material-icons">send</i></button> -->
+                            <button onclick="submitComment(`<%=event._id%>`,`<%=comment._id%>`)"
+                                class="btn-floating btn-large waves-effect waves-light blue"><i
+                                    class="material-icons">send</i></button>
+                            <!-- </form> -->
+                        </div>
+                        <% }%>
+                </li>
+                <% }) %>
+        </ul>
+    </div>
 
 
-            </body>
-            <% if(message) { %>
-                <script>
-                    M.toast({ html: '<%= message %>', classes: 'rounded <%= color %>' });
-                </script>
-                <% } %>
-                    <script>
-                        function editComment(commentId) {
-                            document.getElementById("edit-" + commentId).style.display = "block";
-                            document.getElementById("show-" + commentId).style.display = "none"
-                        };
-                        async function submitComment(eventId, commentId) {
-                            const text = document.getElementById("comment-" + commentId).value.trim();
-                            if (text) {
-                                const response = await fetch(`http://localhost:3000/comments/${commentId}`, {
-                                    method: 'PUT',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify({
-                                        text
-                                    })
-                                })
-                                const newComment = await response.json();
-                                console.log(newComment);
-                                document.getElementById("comment-text-" + commentId).innerText = text;
-                                document.getElementById("edit-" + commentId).style.display = "none";
-                            document.getElementById("show-" + commentId).style.display = "block"
-
-                            }
-                        }
-                    </script>
-
-
-<%- include('../partials/footer') %>
-
-               
+    <%- include('../partials/footer') %>
