@@ -4,7 +4,7 @@
     <div class="container">
         <form action="/events" id="new-form" method="POST">
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s8">
                     <label>Title:</label>
                     <input class="validate" placeholder="don't start with space :)" type="text" name="title" required
                         pattern="\w+.*">
@@ -12,20 +12,20 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s8">
                     <label>Details:</label>
                     <input type="text" name="details">
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s8">
                     <label>Limit of Guests:</label>
                     <input class="validate" min="2" type="number" name="guestLimit" value="6">
                     <span class="helper-text" data-error="wrong! At least 2 people" data-success="right">"at least 2 people"</span>
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s8">
                     <label>Date:</label>
                     <br>
                     <br>
@@ -36,13 +36,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s8">
                     <label>Place:</label>
                     <input type="text" name="place">
                 </div>
             </div> 
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s8">
                     <button class="btn-floating btn-large waves-effect waves-light red" type="submit"><i
                             class="material-icons">send</i></button>
                 </div>
