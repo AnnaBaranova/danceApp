@@ -4,11 +4,15 @@
 <div class="container">
 <form action="/events/<%=event._id%>?_method=PUT" id="edit-form" method="POST">
     <label>Title:</label>
-    <input type="text" placeholder="don't start with space :)" name="title" value="<%= event.title %>" required pattern="\w+.*">
+    <input class="validate" type="text" placeholder="don't start with space :)" name="title" value="<%= event.title %>" required pattern="\w+.*">
+    <span class="helper-text" data-error="wrong" data-success="right"></span>
+    <br>
     <label>Details:</label>
     <input type="text" name="details" value="<%= event.details %>">
     <label>Limit of Guests:<span> "at least 2 people"</span></label>
-    <input type="number" name="guestLimit" value="<%= event.guestLimit %>">
+    <input class="validate" min="2"type="number" name="guestLimit" value="<%= event.guestLimit %>">
+    <span class="helper-text" data-error="wrong" data-success="right"></span>
+    <br>
     <label>Date:<span> "Choose at least 1 day from now and not more than 90 days"</span></label>
             <input min="<%= new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().slice(0, 16)%>"
             max="<%= new Date(new Date().setMonth(new Date().getMonth() + 3)).toISOString().slice(0, 16)%>"

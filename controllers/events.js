@@ -125,7 +125,7 @@ function addAttendee(req, res) {
                 }
             }
         })
-        .catch(() => res.redirect('/events'))
+        .catch(() => res.redirect(`/events${message("Sorry! You cannot join the event", "red")}`));
 
 };
 
