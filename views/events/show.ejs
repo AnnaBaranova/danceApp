@@ -1,9 +1,9 @@
 <%- include('../partials/header') %>
-<div class="container"> 
-    <h3>
-        <%= event.title %>
-    </h3>
-    <br>
+    <div class="container">
+        <h3>
+            <%= event.title %>
+        </h3>
+        <br>
         <table>
             <thead>
                 <tr>
@@ -90,7 +90,8 @@
                                     </p>
                                     <% if (comment.userId.equals(user._id)) { %>
                                         <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                                            <button type="submit" class="btn-floating btn-small waves-effect waves-light red"><i
+                                            <button type="submit"
+                                                class="btn-floating btn-small waves-effect waves-light red"><i
                                                     class="material-icons">clear</i></button>
                                         </form>
                                         <br>
@@ -108,15 +109,22 @@
                     </div>
                     <% if (comment.userId.equals(user._id)) { %>
                         <div id="edit-<%= comment._id %>" class="container" style="display: none">
-                           
-                            <h6>Text:</h6>
-                            <input id="comment-<%=comment._id%>" type="text" name="text" value="<%= comment.text %>"
-                                required pattern="\w+.*">
-                            
-                            <button onclick="submitComment(`<%=event._id%>`,`<%=comment._id%>`)"
-                                class="btn-floating btn-small waves-effect waves-light red"><i
-                                    class="material-icons">send</i></button>
-                            <!-- </form> -->
+                            <div class="row">
+                                <div class="input-field col s8">
+                                    <h5>Update comment:</h5>
+                                    <h6>Text:</h6>
+                                    <input class="validate" id="comment-<%=comment._id%>" type="text" name="text"
+                                        value="<%= comment.text %>" required pattern="\w+.*">
+                                    <span class="helper-text" data-error="wrong" data-success="right"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s8">
+                                    <button onclick="submitComment(`<%=event._id%>`,`<%=comment._id%>`)"
+                                        class="btn-floating btn-small waves-effect waves-light red"><i
+                                            class="material-icons">send</i></button>
+                                </div>
+                            </div>
                         </div>
                         <% }%>
                 </li>
