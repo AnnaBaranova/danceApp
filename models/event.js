@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new mongoose.Schema(
     {
-        text: String,
+        text: {
+            type: String,
+            match: /\w+.*/,
+        },
         userId: {
             type: Schema.Types.ObjectId, ref: 'User'
         },

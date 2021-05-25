@@ -39,7 +39,11 @@ function index(req, res) {
 
 
 function newEvent(req, res) {
-    res.render('events/new', { title: 'Add Event' });
+    res.render('events/new', {
+        title: 'Add Event',
+        message: req.query.message,
+        color: req.query.color
+    });
 };
 
 function create(req, res) {
@@ -71,9 +75,14 @@ function edit(req, res) {
         .then(event => {
             if (!event.hostId.equals(req.user._id)) {
                 return res.redirect(`/events/${event._id}`);
-        } else {
-            res.render('events/edit', { title: 'Edit Event', event })
-        }
+            } else {
+                res.render('events/edit', {
+                    title: 'Edit Event',
+                    event,
+                    message: req.query.message,
+                    color: req.query.color
+                })
+            }
         })
         .catch(err => res.redirect('/events'));
 
@@ -106,11 +115,11 @@ function addAttendee(req, res) {
             if (event.hostId.toString() === req.user._id || event.attendees.includes(req.user._id)) {
                 res.redirect('/events')
             } else {
-                if(event.attendees.length < event.guestLimit){
-                event.attendees.push(req.user._id);
-                event.save()
-                    .then((event) => res.redirect(`/events?${message("You joined: " + event.title, "green")}`))
-                    .catch(() => res.redirect('/events'))
+                if (event.attendees.length < event.guestLimit) {
+                    event.attendees.push(req.user._id);
+                    event.save()
+                        .then((event) => res.redirect(`/events?${message("You joined: " + event.title, "green")}`))
+                        .catch(() => res.redirect('/events'))
                 } else {
                     res.redirect(`/events?${message("Sorry! No spots left " + event.title, "red")}`)
                 }

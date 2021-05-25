@@ -1,8 +1,8 @@
 <%- include('../partials/header') %>
 
     <% if(user._id.equals(profile._id)){%>
-        <h3>My Profile</h3>
         <div class="container">
+            <h3>My Profile</h3>
             <form action="/users/<%=profile._id%>?_method=PUT" id="edit-form" method="POST">
                 <img src="<%= profile.avatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
                 <br>
@@ -18,31 +18,32 @@
             </form>
         </div>
         <% } else { %>
-            <h3>User's Profile</h3>
-            <img src="<%= profile.avatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
-            <table>
-                <thead>
-                    <tr>
-                        <th>Details</th>
-                    </tr>
-                    <tr>
-                        <th><%= profile.name %></th>
-                    </tr>
-                    <tr>
-                        <th><%= profile.email %></th>
-                    </tr>
-                    <tr>
-                        <th><%= profile.phone%></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% } %>
+            <div class="container">
+                <h3>User's Profile</h3>
+                <img src="<%= profile.avatar %>" alt="" class="circle responsive-img">&nbsp;&nbsp;
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <%= profile.name %>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <%= profile.email %>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <%= profile.phone%>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <% } %>
 
-    </body>
-        <% if(message) { %>
-                        <script>
-                            M.toast({ html: '<%= message %>', classes: 'rounded <%= color %>' });
-                        </script>
-                        <% } %>
-
-                            </html>
+     <%- include('../partials/footer') %>
