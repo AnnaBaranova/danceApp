@@ -75,8 +75,7 @@
                         <%= e.hostName %>
                     </td>
                     <td><a href="/events/<%= e._id %>">DETAILS</a></td>
-                    <td> <a href="/events/<%= e._id %>/leave" class="btn-floating btn-small waves-effect waves-light red">Leave<i
-                        class="material-icons">add</i></a></td>
+                    <td> <a href="/events/<%= e._id %>/leave" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">exit_to_app</i></a></td>
                 </tr>
                 <% }); %>
 
@@ -115,8 +114,8 @@
                     </td>
                     <td><a href="/events/<%= e._id %>">DETAILS</a></td>
                     <% if (e.attendees.length !== e.guestLimit) { %>
-                    <td> <a href="/events/<%= e._id %>/join" class="btn-floating btn-small waves-effect waves-light green pulse">Join<i
-                                class="material-icons">add</i></a></td>
+                    <td> <a href="/events/<%= e._id %>/join" class="btn-floating btn-small waves-effect waves-light green pulse"><i
+                                class="material-icons">exposure_plus_1</i></a></td>
                                 <% } %>
                 </tr>
                 <% }); %>
@@ -127,6 +126,7 @@
         <h5><i class="medium material-icons">sentiment_very_dissatisfied</i>No more Events</h5>
         <% } %>
         <br>
+        <div id="past-events">
     <h3>Past Events</h3>
     <% if (pastEvents.length) { %>
     <table>
@@ -160,6 +160,7 @@
 
         </tbody>
     </table>
+    </div>
     <% } else { %>
         <h5><i class="medium material-icons">sentiment_very_dissatisfied</i>No past Events</h5>
         <% } %>
