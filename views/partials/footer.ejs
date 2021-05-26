@@ -18,7 +18,7 @@
             async function submitComment(commentId) {
                 const text = document.getElementById("comment-" + commentId).value.trim();
                 if (text) {
-                    const response = await fetch(`http://localhost:3000/comments/${commentId}`, {
+                    const response = await fetch(`<%=process.env.SERVER_URI%>/comments/${commentId}`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
@@ -36,7 +36,7 @@
         </script>
         <script>
             async function addRemoveLike(commentId) {
-                const response = await fetch(`http://localhost:3000/comments/${commentId}/like`, {
+                const response = await fetch(`<%=process.env.SERVER_URI%>/comments/${commentId}/like`, {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' }
                 })
