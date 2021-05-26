@@ -54,7 +54,6 @@
             <a href="/events/<%= event._id %>/edit" class="btn-floating btn-large waves-effect waves-light red"><i
                     class="material-icons">edit</i></a>
             <% }%>
-
     </div>
     <div class="row container">
         <h5>Comments</h5>
@@ -98,12 +97,16 @@
 
                                         <% } else {%>
                                             <% if (comment.likes.includes(user._id)) { %>
-                                                <a href="/comments/<%= comment._id %>/like" class="secondary-content"><i
-                                                        class="material-icons">star</i></a>
+                                                <div onclick="addRemoveLike(`<%=comment._id%>`)"
+                                                    class="secondary-content">
+                                                    <i id="like-<%= comment._id %>" class="material-icons">star</i>
+                                                </div>
                                                 <% } else {%>
-                                                    <a href="/comments/<%= comment._id %>/like"
-                                                        class="secondary-content"><i
-                                                            class="material-icons">star_border</i></a>
+                                                    <div onclick="addRemoveLike(`<%=comment._id%>`)"
+                                                        class="secondary-content">
+                                                        <i id="like-<%= comment._id %>"
+                                                            class="material-icons">star_border</i>
+                                                    </div>
                                                     <% }%>
                                                         <% }%>
                                                             <p>Posted:
@@ -113,10 +116,9 @@
                                                                 <%= comment.updatedAt.toISOString().slice(0, 16) %>
                                                             </p>
                                                             <p>Likes:
-                                                                <strong>
+                                                                <strong id="like-count-<%= comment._id %>">
                                                                     <%= comment.likes.length%>
                                                                 </strong>
-
                     </div>
                     <% if (comment.userId.equals(user._id)) { %>
                         <div id="edit-<%= comment._id %>" class="container" style="display: none">
@@ -131,7 +133,7 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s8">
-                                    <button onclick="submitComment(`<%=event._id%>`,`<%=comment._id%>`)"
+                                    <button onclick="submitComment(`<%=comment._id%>`)"
                                         class="btn-floating btn-small waves-effect waves-light red"><i
                                             class="material-icons">send</i></button>
                                 </div>

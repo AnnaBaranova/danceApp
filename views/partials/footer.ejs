@@ -2,7 +2,6 @@
 <footer class="page-footer col 8 s12">
     <div class="container">
         © 2021 Anna Baranova
-        <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
     </div>
 </footer>
 </body>
@@ -16,7 +15,7 @@
                 document.getElementById("edit-" + commentId).style.display = "block";
                 document.getElementById("show-" + commentId).style.display = "none"
             };
-            async function submitComment(eventId, commentId) {
+            async function submitComment(commentId) {
                 const text = document.getElementById("comment-" + commentId).value.trim();
                 if (text) {
                     const response = await fetch(`http://localhost:3000/comments/${commentId}`, {
@@ -32,8 +31,22 @@
                     document.getElementById("edit-" + commentId).style.display = "none";
                     document.getElementById("show-" + commentId).style.display = "block"
                     M.toast({ html: 'Comment updated', classes: 'rounded green' });
-
                 }
+            }
+        </script>
+        <script>
+            async function addRemoveLike(commentId) {
+                const response = await fetch(`http://localhost:3000/comments/${commentId}/like`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                const newLike = await response.json();
+                console.log(newLike);
+                if (newLike.text) {
+                    document.getElementById("like-" + commentId).innerText = newLike.text;
+                    document.getElementById("like-count-" + commentId).innerText = newLike.count;
+                }
+                M.toast({ html: newLike.toast, classes: newLike.color });
             }
         </script>
 
