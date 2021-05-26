@@ -51,21 +51,6 @@ function edit(req, res) {
         .catch(err => res.redirect('/events'));
 };
 
-// function update(req, res) {
-//     Event.findOne({ 'comments._id': req.params.id })
-//         .then(event => {
-//             const commentUpdate = event.comments.id(req.params.id);
-//             if (!commentUpdate.userId.equals(req.user._id)) return res.redirect(`/events/${event._id}`);
-//             commentUpdate.text = req.body.text;
-//             return event.save()
-//         })
-//         .then(event => res.redirect(`/events/${event._id}?${message("Update Comment", "green")}`))
-//         .catch(err => {
-//             console.log(err);
-//             res.redirect('/events');
-//         });
-// };
-
 function update(req, res) {
     Event.findOne({ 'comments._id': req.params.id })
         .then(event => {
@@ -86,24 +71,44 @@ function addRemoveLike(req, res) {
         .then((event) => {
             const commentLike = event.comments.find(el => el._id.toString() === req.params.id.toString());
             if (commentLike.userId.equals(req.user._id)) {
-                return res.redirect(`/events/${event._id}?${message("it's your comment", "red")}`);
+                return res.status(200).send({
+                    toast: "it's your comment",
+                    color: "red"
+                })
             } else if (commentLike.likes.includes(req.user._id)) {
                 const newLikes = commentLike.likes.filter(el => el.toString() !== req.user._id.toString());
                 commentLike.likes = newLikes;
                 event.save()
-                    .then((event) => res.redirect(`/events/${event._id}?${message("-1 like", "red")}`))
-                    .catch(() => res.redirect('/events'))
+                    .then(event => res.status(200).send({
+                        text: "star_border",
+                        toast: "-1 like",
+                        color: "red",
+                        count: newLikes.length
+                    }))
+                    .catch(err => {
+                        console.log(err);
+                        res.status(500).send({ error: "err" });
+                    })
             } else {
                 commentLike.likes.push(req.user._id);
                 event.save()
-                    .then((event) => res.redirect(`/events/${event._id}?${message("+1 like", "green")}`))
-                    .catch(() => res.redirect('/events'))
+                    .then(event => res.status(200).send({
+                        text: "star",
+                        toast: "+1 like",
+                        color: "green",
+                        count: commentLike.likes.length
+                    }))
+                    .catch(err => {
+                        console.log(err);
+                        res.status(500).send({ error: "err" });
+                    })
             }
         })
-        .catch(() => res.redirect('/events'))
-
+        .catch(err => {
+            console.log(err);
+            res.status(500).send({ error: "err" });
+        })
 };
-
 
 module.exports = {
     create,
@@ -111,5 +116,4 @@ module.exports = {
     edit,
     update,
     addRemoveLike,
-    // updatePatch,
 }
