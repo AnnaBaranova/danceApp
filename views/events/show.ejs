@@ -82,30 +82,41 @@
                                     <p id="comment-text-<%=comment._id%>" class="text">
                                         <%= comment.text%>
                                     </p>
-                                    <p>Posted:
-                                        <%= comment.createdAt.toISOString().slice(0, 16) %>
-                                    </p>
-                                    <p> Updated:
-                                        <%= comment.updatedAt.toISOString().slice(0, 16) %>
-                                    </p>
+
                                     <% if (comment.userId.equals(user._id)) { %>
-                                        <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                                            <button type="submit"
-                                                class="btn-floating btn-small waves-effect waves-light red"><i
-                                                    class="material-icons">clear</i></button>
-                                        </form>
-                                        <br>
+
                                         <button onclick="editComment(`<%=comment._id%>`)"
                                             class="btn-floating btn-small waves-effect waves-light red"><i
                                                 class="material-icons">edit</i></button>
+
+
+                                        <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                            <button type="submit"
+                                                class="btn-floating btn-small waves-effect waves-light red secondary-content"><i
+                                                    class="material-icons">clear</i></button>
+                                        </form>
+
                                         <% } else {%>
-                                            <a href="/comments/<%= comment._id %>/like" class="secondary-content"><i
-                                                    class="material-icons">grade</i></a>
-                                            <% }%>
-                                                <p>Likes:
-                                                    <strong>
-                                                        <%= comment.likes.length%>
-                                                    </strong>
+                                            <% if (comment.likes.includes(user._id)) { %>
+                                                <a href="/comments/<%= comment._id %>/like" class="secondary-content"><i
+                                                        class="material-icons">star</i></a>
+                                                <% } else {%>
+                                                    <a href="/comments/<%= comment._id %>/like"
+                                                        class="secondary-content"><i
+                                                            class="material-icons">star_border</i></a>
+                                                    <% }%>
+                                                        <% }%>
+                                                            <p>Posted:
+                                                                <%= comment.createdAt.toISOString().slice(0, 16) %>
+                                                            </p>
+                                                            <p> Updated:
+                                                                <%= comment.updatedAt.toISOString().slice(0, 16) %>
+                                                            </p>
+                                                            <p>Likes:
+                                                                <strong>
+                                                                    <%= comment.likes.length%>
+                                                                </strong>
+
                     </div>
                     <% if (comment.userId.equals(user._id)) { %>
                         <div id="edit-<%= comment._id %>" class="container" style="display: none">

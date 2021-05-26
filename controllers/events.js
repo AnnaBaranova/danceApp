@@ -25,7 +25,6 @@ function index(req, res) {
                     }
                 } else {
                     pastEvents.push(event)
-                    console.log(event)
                 }
             })
 
@@ -41,7 +40,10 @@ function index(req, res) {
             })
         })
 
-        .catch(err => console.log(err))
+        .catch(err => {
+            res.redirect(`/events?${message("Sorry! Something is wrong", "red")}`);
+            console.log(err)
+        })
 };
 
 
@@ -74,7 +76,7 @@ function show(req, res) {
                 color: req.query.color
             })
         })
-        .catch(err => res.redirect(`/events${message("Sorry! Cannot show an event", "red")}`));
+        .catch(err => res.redirect(`/events?${message("Sorry! Cannot show an event", "red")}`));
 };
 
 function edit(req, res) {
@@ -91,7 +93,7 @@ function edit(req, res) {
                 })
             }
         })
-        .catch(err => res.redirect(`/events${message("Sorry! You cannot edit the event", "red")}`));
+        .catch(err => res.redirect(`/events?${message("Sorry! You cannot edit the event", "red")}`));
 
 };
 
@@ -107,13 +109,13 @@ function update(req, res) {
             return event.save()
         })
         .then((event) => res.redirect(`/events/${event._id}?${message("Updated", "green")}`))
-        .catch(err => res.redirect(`/events${message("Sorry! You cannot update the event", "red")}`));
+        .catch(err => res.redirect(`/events?${message("Sorry! You cannot update the event", "red")}`));
 }
 
 function deleteEvent(req, res) {
     Event.findByIdAndDelete(req.params.id)
         .then(() => res.redirect(`/events?${message("Deleted", "red")}`))
-        .catch(() => res.redirect(`/events${message("Sorry! You cannot delete the event", "red")}`));
+        .catch(() => res.redirect(`/events?${message("Sorry! You cannot delete the event", "red")}`));
 };
 
 function addAttendee(req, res) {
@@ -132,7 +134,7 @@ function addAttendee(req, res) {
                 }
             }
         })
-        .catch(() => res.redirect(`/events${message("Sorry! You cannot join the event", "red")}`));
+        .catch(() => res.redirect(`/events?${message("Sorry! You cannot join the event", "red")}`));
 
 };
 
@@ -140,16 +142,22 @@ function removeAttendee(req, res) {
     Event.findById(req.params.id)
         .then((event) => {
             if (event.hostId.toString() === req.user._id) {
-                res.redirect('/events')
+                res.redirect(`/events?${message("Sorry! You are the host", "red")}`)
             } else {
                 const newAttendees = event.attendees.filter(el => el.toString() !== req.user._id.toString());
                 event.attendees = newAttendees
                 event.save()
                     .then((event) => res.redirect(`/events?${message("You left: " + event.title, "red")}`))
-                    .catch(() => res.redirect('/events'))
+                    .catch(err => {
+                        console.log(err);
+                        res.redirect(`/events?${message("Sorry! Too late to leave", "red")}`)
+                    })
             }
         })
-        .catch(() => res.redirect('/events'))
+        .catch(err => {
+            console.log(err);
+            res.redirect(`/events?${message("Sorry! Something is wrong", "red")}`)
+        })
 
 };
 
