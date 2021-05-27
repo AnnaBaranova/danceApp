@@ -1,4 +1,4 @@
-![Main page]()
+![Landing](public/images/Landing.png)
 
 ## Project 2 <br> Full-stack CRUD Application
 
@@ -42,7 +42,6 @@ npm run dev
 
 
 7. **Screenshots**:
-![Landing](public/images/Landing.png)
 ![Index page](public/images/Index_page.png)
 ![Show page](public/images/Show_page.png)
 ![User's profile](public/images/My_profile.png)
