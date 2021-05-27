@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const commentsRouter = require('../controllers/comments');
 
 function isLoggedIn(req, res, next) {

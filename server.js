@@ -1,20 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const methodOverride = require('method-override');
-var session = require('express-session');
-var passport = require('passport');
+const session = require('express-session');
+const passport = require('passport');
 
 require('dotenv').config();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 const eventsRouter = require('./routes/events');
 const commentsRouter = require('./routes/comments');
 
-var app = express();
+const app = express();
 
 // mongoDB connection
 require('./config/database');

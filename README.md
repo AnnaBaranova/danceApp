@@ -21,6 +21,7 @@ GOOGLE_SECRET=<...>
 GOOGLE_CALLBACK=http://<your server address and port>/oauth2callback
 
 SESSION_SECRET=<...>
+SERVER_URI=<...>
 ```
 
 *  Run server:
@@ -53,6 +54,7 @@ npm run dev
 
 9. **My key learnings**:
 
+* OAuth authentification
 * AJAX
 * RegEx
 * User stories

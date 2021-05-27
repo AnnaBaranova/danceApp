@@ -29,7 +29,6 @@ function index(req, res) {
 
             res.render('events', {
                 title: 'All Events',
-                // user: req.user, 
                 myEvents,
                 guestEvents,
                 otherEvents,
