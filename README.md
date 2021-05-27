@@ -28,9 +28,12 @@ SESSION_SECRET=<...>
 npm run dev
 ```
 
-4. **Example of wareframe**: 
+4. **Examples of wareframe**: 
 
-<img src="" width="200" height="200">
+<img src="public/images/Main_page.jpg" width="200" height="200">
+<img src="public/images/Events_Index_page.jpg" width="200" height="200">
+<img src="public/images/Events_show_page.jpg" width="200" height="200">
+
 
 5. **User Stories**: [Trello](https://trello.com/b/8hvBQePf/kizme-app)
 
@@ -39,22 +42,23 @@ npm run dev
 
 
 7. **Screenshots**:
-
-* All Events: 
-
-![Link]()
-
+![Landing](public/images/Landing.png)
+![Index page](public/images/Index_page.png)
+![Show page](public/images/Show_page.png)
+![User's profile](public/images/My_profile.png)
 
 8. **My biggest challenges**:
 
-> * AJAX
-
+* Implementing AJAX to edit comments and add/remove "likes".
+* Adding time validation to my forms.
 
 9. **My key learnings**:
 
-> * How to build 
+* AJAX
+* RegEx
+* User stories
+* ERD
 
 10. **Next steps**: 
 
-> * Add 
-
+* User story: As a Host, I want to approve Users to be my Attendees
