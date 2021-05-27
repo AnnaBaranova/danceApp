@@ -30,7 +30,6 @@ function show(req, res) {
         });
 };
 
-
 function update(req, res) {
     User.findById(req.user)
         .then(user => {

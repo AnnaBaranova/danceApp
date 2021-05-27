@@ -1,172 +1,175 @@
 <%- include('../partials/header') %>
 
-<div class="container">
+    <div class="container">
 
-    <h3>I am a Host</h3>
-    <% if (myEvents.length) { %>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Date</th>
-                <th>GuestLimit</th>
-                <th>Host</th>
-            </tr>
-        </thead>
-        <tbody>
+        <h3>I am a Host</h3>
+        <% if (myEvents.length) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>GuestLimit</th>
+                        <th>Host</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            <% myEvents.forEach(function(e) { %>
-                <tr>
-                    <td>
-                        <%= e.title%>
-                    </td>
-                    <td>
-                        <%= e.date.toISOString().slice(0, 16) %>
-                    </td>
-                    <td>
-                        <%= e.attendees.length %>/<%= e.guestLimit %>
-                    </td>
-                    <td>
-                        <%= e.hostName %>
-                    </td>
-                    <td><a href="/events/<%= e._id %>">DETAILS</a></td>
-                    <td>
-                        <form action="/events/<%= e._id %>?_method=DELETE" class="delete-form" method="POST">
-                            <button type="submit" class="btn-floating btn-small waves-effect waves-light red"><i
-                                    class="material-icons">clear</i>></button>
-                        </form>
-                    </td>
-                </tr>
-                <% }); %>
-        </tbody>
-    </table>
-    <% } else { %>
-        <h5>You are not a host yet</h5>
-        <% } %>
-    <br>
-    <a href="/events/new" class="btn-floating btn-large waves-effect waves-light red pulse"><i
-            class="material-icons">add</i></a>
-    <br>
-    <h3>I am a Guest</h3>
-    <% if (guestEvents.length) { %>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Date</th>
-                <th>GuestLimit</th>
-                <th>Host</th>
-            </tr>
-        </thead>
-        <tbody>
+                    <% myEvents.forEach(function(e) { %>
+                        <tr>
+                            <td>
+                                <%= e.title%>
+                            </td>
+                            <td>
+                                <%= e.date.toISOString().slice(0, 16) %>
+                            </td>
+                            <td>
+                                <%= e.attendees.length %>/<%= e.guestLimit %>
+                            </td>
+                            <td>
+                                <%= e.hostName %>
+                            </td>
+                            <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                            <td>
+                                <form action="/events/<%= e._id %>?_method=DELETE" class="delete-form" method="POST">
+                                    <button type="submit" class="btn-floating btn-small waves-effect waves-light red"><i
+                                            class="material-icons">clear</i>></button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+            <% } else { %>
+                <h5>You are not a host yet</h5>
+                <% } %>
+                    <br>
+                    <a href="/events/new" class="btn-floating btn-large waves-effect waves-light red pulse"><i
+                            class="material-icons">add</i></a>
+                    <br>
+                    <h3>I am a Guest</h3>
+                    <% if (guestEvents.length) { %>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Date</th>
+                                    <th>GuestLimit</th>
+                                    <th>Host</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-            <% guestEvents.forEach(function(e) { %>
-                <tr>
-                    <td>
-                        <%= e.title%>
-                    </td>
-                    <td>
-                        <%= e.date.toISOString().slice(0, 16) %>
-                    </td>
-                    <td>
-                        <%= e.attendees.length %>/<%= e.guestLimit %>
-                    </td>
-                    <td>
-                        <%= e.hostName %>
-                    </td>
-                    <td><a href="/events/<%= e._id %>">DETAILS</a></td>
-                    <td> <a href="/events/<%= e._id %>/leave" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">exit_to_app</i></a></td>
-                </tr>
-                <% }); %>
+                                <% guestEvents.forEach(function(e) { %>
+                                    <tr>
+                                        <td>
+                                            <%= e.title%>
+                                        </td>
+                                        <td>
+                                            <%= e.date.toISOString().slice(0, 16) %>
+                                        </td>
+                                        <td>
+                                            <%= e.attendees.length %>/<%= e.guestLimit %>
+                                        </td>
+                                        <td>
+                                            <%= e.hostName %>
+                                        </td>
+                                        <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                                        <td> <a href="/events/<%= e._id %>/leave"
+                                                class="btn-floating btn-small waves-effect waves-light red"><i
+                                                    class="material-icons">exit_to_app</i></a></td>
+                                    </tr>
+                                    <% }); %>
 
-        </tbody>
-    </table>
-    <% } else { %>
-        <h5>You haven't join any Event yet</h5>
-        <% } %>
-    <br>
-    <h3>Other Events</h3>
-    <% if (otherEvents.length) { %>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Date</th>
-                <th>GuestLimit</th>
-                <th>Host</th>
-            </tr>
-        </thead>
-        <tbody>
+                            </tbody>
+                        </table>
+                        <% } else { %>
+                            <h5>You haven't join any Event yet</h5>
+                            <% } %>
+                                <br>
+                                <h3>Other Events</h3>
+                                <% if (otherEvents.length) { %>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Date</th>
+                                                <th>GuestLimit</th>
+                                                <th>Host</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-            <% otherEvents.forEach(function(e) { %>
-                <tr>
-                    <td>
-                        <%= e.title%>
-                    </td>
-                    <td>
-                        <%= e.date.toISOString().slice(0, 16) %>
-                    </td>
-                    <td>
-                        <%= e.attendees.length %>/<%= e.guestLimit %>
-                    </td>
-                    <td>
-                        <%= e.hostName %>
-                    </td>
-                    <td><a href="/events/<%= e._id %>">DETAILS</a></td>
-                    <% if (e.attendees.length !== e.guestLimit) { %>
-                    <td> <a href="/events/<%= e._id %>/join" class="btn-floating btn-small waves-effect waves-light green pulse"><i
-                                class="material-icons">exposure_plus_1</i></a></td>
-                                <% } %>
-                </tr>
-                <% }); %>
+                                            <% otherEvents.forEach(function(e) { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= e.title%>
+                                                    </td>
+                                                    <td>
+                                                        <%= e.date.toISOString().slice(0, 16) %>
+                                                    </td>
+                                                    <td>
+                                                        <%= e.attendees.length %>/<%= e.guestLimit %>
+                                                    </td>
+                                                    <td>
+                                                        <%= e.hostName %>
+                                                    </td>
+                                                    <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                                                    <% if (e.attendees.length !==e.guestLimit) { %>
+                                                        <td> <a href="/events/<%= e._id %>/join"
+                                                                class="btn-floating btn-small waves-effect waves-light green pulse"><i
+                                                                    class="material-icons">exposure_plus_1</i></a></td>
+                                                        <% } %>
+                                                </tr>
+                                                <% }); %>
 
-        </tbody>
-    </table>
-    <% } else { %>
-        <h5><i class="medium material-icons">sentiment_very_dissatisfied</i>No more Events</h5>
-        <% } %>
-        <br>
-        <div id="past-events">
-    <h3>Past Events</h3>
-    <% if (pastEvents.length) { %>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Date</th>
-                <th>GuestLimit</th>
-                <th>Host</th>
-            </tr>
-        </thead>
-        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <% } else { %>
+                                        <h5><i class="medium material-icons">sentiment_very_dissatisfied</i>No more
+                                            Events</h5>
+                                        <% } %>
+                                            <br>
+                                            <div id="past-events">
+                                                <h3>Past Events</h3>
+                                                <% if (pastEvents.length) { %>
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Title</th>
+                                                                <th>Date</th>
+                                                                <th>GuestLimit</th>
+                                                                <th>Host</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
 
-            <% pastEvents.forEach(function(e) { %>
-                <tr>
-                    <td>
-                        <%= e.title%>
-                    </td>
-                    <td>
-                        <%= e.date.toISOString().slice(0, 16) %>
-                    </td>
-                    <td>
-                        <%= e.attendees.length %>/<%= e.guestLimit %>
-                    </td>
-                    <td>
-                        <%= e.hostName %>
-                    </td>
-                    <td><a href="/events/<%= e._id %>">DETAILS</a></td>
-                </tr>
-                <% }); %>
+                                                            <% pastEvents.forEach(function(e) { %>
+                                                                <tr>
+                                                                    <td>
+                                                                        <%= e.title%>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= e.date.toISOString().slice(0, 16) %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= e.attendees.length %>/<%= e.guestLimit %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= e.hostName %>
+                                                                    </td>
+                                                                    <td><a href="/events/<%= e._id %>">DETAILS</a></td>
+                                                                </tr>
+                                                                <% }); %>
 
-        </tbody>
-    </table>
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                            <% } else { %>
+                                                <h5><i class="medium material-icons">sentiment_very_dissatisfied</i>No
+                                                    past Events</h5>
+                                                <% } %>
     </div>
-    <% } else { %>
-        <h5><i class="medium material-icons">sentiment_very_dissatisfied</i>No past Events</h5>
-        <% } %>
-</div>
 
 
     <%- include('../partials/footer') %>
-    
-   

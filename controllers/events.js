@@ -4,7 +4,6 @@ function message(message, color) {
     return `message=${encodeURIComponent(message)}&color=${color}`;
 }
 
-
 function index(req, res) {
     Event.find({})
         .then(events => {
@@ -45,7 +44,6 @@ function index(req, res) {
             console.log(err)
         })
 };
-
 
 function newEvent(req, res) {
     res.render('events/new', {

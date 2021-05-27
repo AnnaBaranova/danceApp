@@ -7,7 +7,6 @@ function isLoggedIn(req, res, next) {
     res.redirect('/auth/google');
   };
 
-
 router.get('/', isLoggedIn, eventsRouter.index)
 router.get('/new', isLoggedIn, eventsRouter.new)
 router.post('/', isLoggedIn, eventsRouter.create)

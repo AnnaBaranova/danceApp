@@ -49,7 +49,7 @@ const eventSchema = new mongoose.Schema(
         place: String,
         guestLimit: {
             type: Number,
-            min:2,
+            min: 2,
             default: 6,
         },
         details: String,
