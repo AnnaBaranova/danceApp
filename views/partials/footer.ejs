@@ -46,7 +46,7 @@
                     document.getElementById("like-" + commentId).innerText = newLike.text;
                     document.getElementById("like-count-" + commentId).innerText = newLike.count;
                 }
-                M.toast({ html: newLike.toast, classes: newLike.color });
+                M.toast({ html: newLike.toast, classes: 'rounded '+ newLike.color });
             }
         </script>
 

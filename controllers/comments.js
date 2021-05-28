@@ -12,7 +12,7 @@ function create(req, res) {
             req.body.userName = req.user.name;
             req.body.userAvatar = req.user.avatar;
             event.comments.push(req.body);
-            return event.save()
+            return event.save({ validateBeforeSave: false })
         })
         .then(event => res.redirect(`/events/${event._id}?${message("Add Comment", "green")}`))
         .catch(err => {
@@ -27,7 +27,7 @@ function deleteComment(req, res) {
             const commentDel = event.comments.id(req.params.id);
             if (!commentDel.userId.equals(req.user._id)) return res.redirect(`/events/${event._id}`);
             commentDel.remove();
-            return event.save()
+            return event.save({ validateBeforeSave: false })
         })
         .then((event) => res.redirect(`/events/${event._id}?${message("Remove Comment", "red")}`))
         .catch(err => {
@@ -36,28 +36,13 @@ function deleteComment(req, res) {
         });
 };
 
-function edit(req, res) {
-    Event.findOne({ 'comments._id': req.params.id })
-        .then(event => {
-            const comment = event.comments.find(el => el._id.toString() === req.params.id.toString());
-            console.log(comment)
-            res.render('comments/edit', {
-                title: 'Edit Comment',
-                comment,
-                message: req.query.message,
-                color: req.query.color
-            })
-        })
-        .catch(err => res.redirect('/events'));
-};
-
 function update(req, res) {
     Event.findOne({ 'comments._id': req.params.id })
         .then(event => {
             const commentUpdate = event.comments.id(req.params.id);
             if (!commentUpdate.userId.equals(req.user._id)) return res.redirect(`/events/${event._id}`);
             commentUpdate.text = req.body.text;
-            return event.save()
+            return event.save({validateBeforeSave: false })
         })
         .then(event => res.status(200).send(event))
         .catch(err => {
@@ -78,7 +63,7 @@ function addRemoveLike(req, res) {
             } else if (commentLike.likes.includes(req.user._id)) {
                 const newLikes = commentLike.likes.filter(el => el.toString() !== req.user._id.toString());
                 commentLike.likes = newLikes;
-                event.save()
+                event.save({ validateBeforeSave: false })
                     .then(event => res.status(200).send({
                         text: "star_border",
                         toast: "-1 like",
@@ -91,7 +76,7 @@ function addRemoveLike(req, res) {
                     })
             } else {
                 commentLike.likes.push(req.user._id);
-                event.save()
+                event.save({ validateBeforeSave: false })
                     .then(event => res.status(200).send({
                         text: "star",
                         toast: "+1 like",
@@ -113,7 +98,6 @@ function addRemoveLike(req, res) {
 module.exports = {
     create,
     delete: deleteComment,
-    edit,
     update,
     addRemoveLike,
 }
