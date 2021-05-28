@@ -7,7 +7,7 @@
 1. **About**: This app was created for my kizomba community. The app allows to create/update/delete an event, to look througth a list of events, to join/leave an event from the list, to add/delete/like comments.
 2. **Technologies used**: HTML, CSS, JavaScript, Node.js, Express.js, MongoDB, Materialize
 
-3. **Getting started**: [Link]()
+3. **Getting started**: [KizMe](https://kizme.herokuapp.com/)
 * Install dependencies: 
 ```
 npm install
